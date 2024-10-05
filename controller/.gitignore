@@ -1,0 +1,9 @@
+arduino.log
+out
+node_modules
+.vscode-test
+.idea
+src/views/app/sprites-generated
+test/**/c_cpp_properties.json
+*.vsix
+assets/platform/*/arduino-cli
