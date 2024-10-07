@@ -1,45 +1,54 @@
+import 'package:configurator/const/keycode.dart';
+
 class KeyConfig {
-  int esc;
-  int enter;
-  int tab;         // for Difficulty(Lobby)
-  int space;       // for Option(Lobby), Manual Fever(Ingame)
+  Key esc;
+  Key enter;
+  Key tab; // for Difficulty(Lobby)
+  Key space; // for Option(Lobby), Manual Fever(Ingame)
 
-  int speedUp;     // digit1
-  int speedDown;   // digit2
-  int rewind;      // Backspace
+  Key speedUp; // digit1
+  Key speedDown; // digit2
+  Key rewind; // Backspace
 
-  int leftShift;   // It may be useless (duplicated with tuneLeftSide in default)
-  int rightShift;  // It may be useless (duplicated with tuneRightSide in default)
+  Key leftShift; // It may be useless (duplicated with tuneLeftSide in default)
+  Key rightShift; // It may be useless (duplicated with tuneRightSide in default)
 
-  int arrowUp;
-  int arrowDown;
-  int arrowLeft;
-  int arrowRight;
+  Key arrowUp;
+  Key arrowDown;
+  Key arrowLeft;
+  Key arrowRight;
 
-  int tuneLeftSide;
-  int tuneS;
-  int tuneD;
-  int tuneF;
-  int tuneC;
-  int tuneM;
-  int tuneJ;
-  int tuneK;
-  int tuneL;
-  int tuneRightSide;
+  Key tuneLeftSide;
+  Key tuneS;
+  Key tuneD;
+  Key tuneF;
+  Key tuneC;
+  Key tuneM;
+  Key tuneJ;
+  Key tuneK;
+  Key tuneL;
+  Key tuneRightSide;
 
-  int emoticon1;  // digit3
-  int emoticon2;  // digit4
-  int emoticon3;  // digit5
-  int emoticon4;  // digit6
-  int emoticon5;  // digit7
+  Key emoticon1; // digit3
+  Key emoticon2; // digit4
+  Key emoticon3; // digit5
+  Key emoticon4; // digit6
+  Key emoticon5; // digit7
 
   KeyConfig(
     this.esc,
+    this.enter,
+    this.tab,
+    this.space,
     this.speedUp,
     this.speedDown,
     this.rewind,
     this.leftShift,
     this.rightShift,
+    this.arrowUp,
+    this.arrowDown,
+    this.arrowLeft,
+    this.arrowRight,
     this.tuneLeftSide,
     this.tuneS,
     this.tuneD,

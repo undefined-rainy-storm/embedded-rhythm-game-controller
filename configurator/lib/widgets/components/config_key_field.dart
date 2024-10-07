@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:configurator/const/keycode.dart' as keycode;
+
+class ConfigKeyField extends StatefulWidget {
+  const ConfigKeyField({super.key, this.description});
+  final String? description;
+
+  @override
+  State<ConfigKeyField> createState() => _ConfigKeyFieldState();
+}
+
+class _ConfigKeyFieldState extends State<ConfigKeyField> {
+  keycode.Key _nowKey = keycode.Key.undefined;
+  final TextEditingController _textEditingController =
+      TextEditingController(text: '');
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_onFocusChange);
+    _textEditingController.text = _nowKey.name;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
+  }
+
+  void _onFocusChange() {
+    if (_focusNode.hasFocus) {}
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          KeyboardListener(
+            focusNode: _focusNode,
+            autofocus: false,
+            onKeyEvent: (event) {
+              if (event is KeyDownEvent) {
+                _nowKey = keycode.Flutter.toKey(event.logicalKey.hashCode);
+                _textEditingController.text = _nowKey.name;
+              }
+            },
+            child: Container(
+              child: TextField(
+                  controller: _textEditingController,
+                  decoration: InputDecoration(border: OutlineInputBorder()),
+                  textAlign: TextAlign.center,
+                  onChanged: (text) {
+                    _textEditingController.text = _nowKey.name;
+                  }),
+              width: 60,
+              height: 60,
+            ),
+          ),
+          Text(widget.description ?? '')
+        ]));
+  }
+}
