@@ -3,14 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:configurator/const/keycode.dart' as keycode;
 
 class ConfigKeyField extends StatefulWidget {
-  const ConfigKeyField({super.key, this.description});
+  const ConfigKeyField({super.key, this.description, this.callbackFunc});
   final String? description;
+  final Null Function(keycode.Key)? callbackFunc;
 
   @override
-  State<ConfigKeyField> createState() => _ConfigKeyFieldState();
+  State<ConfigKeyField> createState() => ConfigKeyFieldState();
 }
 
-class _ConfigKeyFieldState extends State<ConfigKeyField> {
+class ConfigKeyFieldState extends State<ConfigKeyField> {
   keycode.Key _nowKey = keycode.Key.undefined;
   final TextEditingController _textEditingController =
       TextEditingController(text: '');
@@ -45,6 +46,7 @@ class _ConfigKeyFieldState extends State<ConfigKeyField> {
             onKeyEvent: (event) {
               if (event is KeyDownEvent) {
                 _nowKey = keycode.Flutter.toKey(event.logicalKey.hashCode);
+                widget.callbackFunc?.call(_nowKey);
                 _textEditingController.text = _nowKey.name;
               }
             },
