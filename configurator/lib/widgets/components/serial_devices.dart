@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:libserialport/libserialport.dart';
+import 'package:flutter_libserialport/flutter_libserialport.dart';
 
 class SerialDevicesWidget extends StatefulWidget {
   const SerialDevicesWidget({super.key});
