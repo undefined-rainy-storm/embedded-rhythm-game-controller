@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:libserialport/libserialport.dart';
+import 'package:libserialport/libserialport.dart';
 
 class SerialDevicesWidget extends StatefulWidget {
   const SerialDevicesWidget({super.key});
@@ -11,20 +11,16 @@ class SerialDevicesWidget extends StatefulWidget {
 class _SerialDevicesWidgetState extends State<SerialDevicesWidget> {
   List<String> avilablePorts = [
     '(select)',
-    'asdf',
-    'asdafdf',
   ];
   String dropdownValue = '(select)';
 
   @override
   void initState() {
     super.initState();
-    /*
     List<String> gets = SerialPort.availablePorts;
     setState(() {
-      avilablePorts = gets;
+      avilablePorts = ['(select)'] + gets;
     });
-    */
   }
 
   @override
