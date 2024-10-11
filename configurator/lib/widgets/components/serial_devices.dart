@@ -43,17 +43,21 @@ class _SerialDevicesWidgetState extends State<SerialDevicesWidget> {
           .map<DropdownMenuItem<SerialDevice>>((SerialDevice each) {
         String out = '(${each.port}) ${each.deviceName}';
         if (out.length > configMaxDeviceNameLength) {
-          out = out.substring(0, min(configMaxDeviceNameLength, out.length)) +
-              '...';
+          out =
+              '${out.substring(0, min(configMaxDeviceNameLength, out.length))}...';
         }
         return DropdownMenuItem<SerialDevice>(
           value: each,
           child: Text(out),
         );
       }).toList(),
-      onChanged: (SerialDevice? value) {
+      onChanged: (SerialDevice? device) {
         setState(() {
-          dropdownValue = value!;
+          dropdownValue = device!;
+        });
+        device?.openRWComm();
+        device?.requestIsValidDevice().then((value) {
+          print(value);
         });
       },
       value: dropdownValue,
