@@ -1,4 +1,4 @@
-# Rhythm Game Controller: Arduino Seketch
+# Rhythm Game Controller: Arduino Sketch
 
 ## Requirements
 
