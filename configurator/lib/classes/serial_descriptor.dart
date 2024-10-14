@@ -1,5 +1,6 @@
 class SerialDescriptor {
   late final String port;
   late final String description;
-  SerialDescriptor(this.port, this.description);
+  late final String id;
+  SerialDescriptor(this.port, this.description, {this.id = ''});
 }

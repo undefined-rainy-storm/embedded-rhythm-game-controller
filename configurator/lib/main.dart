@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:configurator/widgets/pages/main_config_page.dart';
+import 'package:configurator/widgets/pages/_debug_serial_comm.dart';
 
 void main() {
   runApp(const MyApp());
