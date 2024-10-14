@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test_controller:
+    name: Test Controller Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Test
+        run: |
+          cmake -S . -B build
+          cmake --build build
+      - name: Run Test
+        run: cd make && ctest
