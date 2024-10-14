@@ -38,8 +38,9 @@ typedef struct keymap keymap_t;
 
 class KeymapConfig {
 public:
-  keymap_t map;
+  keymap_t *map;
   int *to_array();
+  KeymapConfig(keymap_t *map);
 };
 
 #endif
