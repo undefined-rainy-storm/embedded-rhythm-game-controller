@@ -19,7 +19,6 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# Create the executable for the tests
 add_executable(
   ${PROJECT_NAME}
   ../controller/keymap.cpp
@@ -29,10 +28,8 @@ add_executable(
   test.cc
 )
 
-# Now you can specify include directories
 target_include_directories(${PROJECT_NAME} PRIVATE ../controller)
 
-# Link the libraries
 target_link_libraries(
   ${PROJECT_NAME}
   GTest::gtest
