@@ -16,4 +16,4 @@ jobs:
           cd controller_test
           cmake -S . -B build
           cmake --build build
-          cd make && ctest
+          cd build && ctest
