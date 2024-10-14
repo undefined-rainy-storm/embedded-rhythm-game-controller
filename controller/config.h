@@ -1,0 +1,7 @@
+#ifndef CONFIG
+#define CONFIG
+
+#define CONFIG_SERIAL_SPEED 9600
+#define EEPROM_GLOBAL_KEYMAP_ADDRESS 0
+
+#endif

@@ -1,40 +1,37 @@
-#include "button_config.h"
+#include "config.h"
+#include "handlers.h"
+#include "utils.h"
+#include "magic.h"
+#include "global.h"
 
-// Define the magic request and response configurations
-const byte handshakeRequest[] = { 0x2e, 0x68, 0x73, 0x2e, 0x74, 0x72, 0x79, 0x2e, 0x68 };
-const byte handshakeResponse[] = { 0x2e, 0x68, 0x73, 0x2e, 0x72, 0x65, 0x73, 0x2e, 0x61 };
+const char handshakeRequest[] = HANDSHAKE_REQUEST;
+const char handshakeResponse[] = HANDSHAKE_RESPONSE;
+const char loadKeyConfigRequest[] = LOAD_KEY_CONFIG_REQUEST;
+const char loadKeyConfigResponse[] = LOAD_KEY_CONFIG_RESPONSE;
 
-const size_t requestLength = sizeof(handshakeRequest);
-byte incomingBuffer[requestLength];
+byte incomingBuffer[MAGIC_LENGTH];
 size_t bytesReceived = 0;
 
 void setup() {
-  Serial.begin(9600); // Ensure this matches the baud rate used in your Flutter app
+  Serial.begin(CONFIG_SERIAL_SPEED);
+  Global::getInstance();
 }
 
 void loop() {
-  // Check if data is available on the serial port
-  while (Serial.available()) {
-    byte incomingByte = Serial.read();
-    incomingBuffer[bytesReceived++] = incomingByte;
+  while (!Serial.available());
 
-    // If we've received enough bytes, compare them to the expected request
-    if (bytesReceived == requestLength) {
-      bool isMatch = true;
-      for (size_t i = 0; i < requestLength; i++) {
-        if (incomingBuffer[i] != handshakeRequest[i]) {
-          isMatch = false;
-          break;
-        }
-      }
+  byte incomingByte = Serial.read();
+  incomingBuffer[bytesReceived++] = incomingByte;
 
-      if (isMatch) {
-        // Send the response back to the Flutter application
-        Serial.write(handshakeResponse, sizeof(handshakeResponse));
-      }
-
-      // Reset the buffer for the next message
-      bytesReceived = 0;
+  
+  if (bytesReceived == MAGIC_LENGTH) {
+    if (equals(incomingBuffer, handshakeRequest, MAGIC_LENGTH)) {
+      Serial.write(handshakeResponse, sizeof(handshakeResponse));
     }
+    if (equals(incomingBuffer, loadKeyConfigResponse, MAGIC_LENGTH)) {
+      Serial.write(loadKeyConfigResponse, sizeof(loadKeyConfigResponse));
+    }
+    // Reset the buffer for the next message
+    bytesReceived = 0;
   }
 }

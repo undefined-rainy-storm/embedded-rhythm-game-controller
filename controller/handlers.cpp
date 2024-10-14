@@ -94,3 +94,9 @@ void onPress(Button key) {
   Keyboard.releaseAll();
 }
 */
+
+void onSerialReceived_checkHandShake() {
+}
+
+void onSerialReceived_checkLoadKeyConfig() {}
+void onSerialReceived_checkSaveKeyConfig() {}
