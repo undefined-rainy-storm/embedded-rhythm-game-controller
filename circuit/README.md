@@ -1,6 +1,6 @@
 # Fritzing Resources
 
-![](./controller_bb.png.ps.png)  
+![](./circuit_bb.png.ps.png)  
 
 Wire circuit diagram written with Fritzing 1.4.0
 
