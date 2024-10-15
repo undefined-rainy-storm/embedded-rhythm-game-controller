@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="31.500668"
+   height="53.869068"
+   viewBox="0 0 31.500668 53.869068"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="g1">
+    <path
+       id="path1"
+       d="m 7.39468,5.15158 h 3.33556 V 10.2661 H 7.39468 Z m 1.66778,2.19874 c -0.37693,0 -0.68296,-0.30603 -0.68296,-0.68296 0,-0.37694 0.30603,-0.68296 0.68296,-0.68296 0.37694,0 0.68296,0.30602 0.68296,0.68296 0,0.37693 -0.30602,0.68296 -0.68296,0.68296 z"
+       style="fill:#ffc51c;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path2"
+       d="m 13.3939,0 h 3.33556 V 10.2661 H 13.3939 Z m 1.6678,2.19873 c -0.3769,0 -0.683,-0.30602 -0.683,-0.68296 0,-0.37693 0.3061,-0.682957 0.683,-0.682957 0.3769,0 0.683,0.306027 0.683,0.682957 0,0.37694 -0.3061,0.68296 -0.683,0.68296 z"
+       style="fill:#ffc51c;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path3"
+       d="M 0,6.92575 V 12.8419 H 3.64196 V 11.6356 H 1.02779 V 6.92575 Z"
+       style="fill:#ffc51c;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path4"
+       d="m 22.5977,11.6356 h -2.6141 v 1.2063 h 3.6419 V 1.88438 h -1.0278 z"
+       style="fill:#ffc51c;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path5"
+       d="m 2.14196,10.2891 h 19.3416 V 40.4018 H 2.14196 Z"
+       style="fill:#a6a4a2;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path6"
+       d="M 14.6503,25.3455 2.14196,10.2891 v 30.1127 z"
+       style="fill:#b5b9bb;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path7"
+       d="M 11.8128,29.0261 2.14196,40.4018 H 21.4836 Z"
+       style="fill:#828282;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+    <path
+       id="path8"
+       d="m 3.96487,12.4059 h 15.6958 V 38.285 H 3.96487 Z"
+       style="fill:#f12b28;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,0,53.869067)" />
+  </g>
+</svg>
