@@ -38,8 +38,6 @@ void setup() {
   #endif
 
   Serial.begin(SERIAL_SPEED);
-  pinMode(0, INPUT_PULLUP);
-  pinMode(1, INPUT_PULLUP);
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
@@ -68,8 +66,6 @@ void loop() {
     invokeVerifyKeyboard();
   }
 
-  if (!digitalRead(0)) Serial.println("[Button] Button 0 has been pressed.");
-  if (!digitalRead(1)) Serial.println("[Button] Button 1 has been pressed.");
   if (!digitalRead(2)) Serial.println("[Button] Button 2 has been pressed.");
   if (!digitalRead(3)) Serial.println("[Button] Button 3 has been pressed.");
   if (!digitalRead(4)) Serial.println("[Button] Button 4 has been pressed.");
