@@ -67,6 +67,17 @@ void loop() {
   if (received == COMMAND_INVOKE_VERIFY_KEYBOARD) {
     invokeVerifyKeyboard();
   }
+
+  if (!digitalRead(0)) Serial.println("[Button] Button 0 has been pressed.");
+  if (!digitalRead(1)) Serial.println("[Button] Button 1 has been pressed.");
+  if (!digitalRead(2)) Serial.println("[Button] Button 2 has been pressed.");
+  if (!digitalRead(3)) Serial.println("[Button] Button 3 has been pressed.");
+  if (!digitalRead(4)) Serial.println("[Button] Button 4 has been pressed.");
+  if (!digitalRead(5)) Serial.println("[Button] Button 5 has been pressed.");
+  if (!digitalRead(6)) Serial.println("[Button] Button 6 has been pressed.");
+  if (!digitalRead(7)) Serial.println("[Button] Button 7 has been pressed.");
+  if (!digitalRead(8)) Serial.println("[Button] Button 8 has been pressed.");
+  if (!digitalRead(9)) Serial.println("[Button] Button 9 has been pressed.");
 }
 
 void invokeVerifyKeyboard() {
