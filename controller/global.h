@@ -1,4 +1,5 @@
 #include "keymap.h"
+#include "flags.h"
 
 #ifndef GLOBAL
 #define GLOBAL
@@ -15,6 +16,7 @@ public:
   static Global *getInstance();
 
   KeymapConfig keymap;
+  SerialCommState serialCommState;  
 };
 
 #endif
