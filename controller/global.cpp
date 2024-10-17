@@ -1,25 +1,19 @@
 // #include <StandardCplusplus.h>
-#include <EEPROM.h>
+#include "global.h"
+#include "EEPROM.h"
 #include "config.h"
 #include "default.h"
-#include "global.h"
 #include "utils.h"
-#include "keymap.h"
 
-Global* Global::instance = nullptr;
-
-Global::Global() {
+inline void setDefaultIfInvalid(int& key, int defaultValue) {
+    if (isnan(key) || key == -1) {
+        key = defaultValue;
+    }
 }
 
-void setDefaultIfInvalid(int& key, int defaultValue) {
-  if (isnan(key) || key == -1) {
-    key = defaultValue;
-  }
-}
-
-Global* Global::getInstance() {
-  if (instance == nullptr) {
-    keymap_t _keymap;
+// Global constructor
+Global::Global() : keymap(&_keymap) {  // Initialize keymap in the initializer list
+    // Load _keymap from EEPROM
     EEPROM.get(EEPROM_GLOBAL_KEYMAP_ADDRESS, _keymap);
 
     setDefaultIfInvalid(_keymap.esc, DEFAULT_KEY_ESC);
@@ -50,11 +44,10 @@ Global* Global::getInstance() {
     setDefaultIfInvalid(_keymap.emoticon3, DEFAULT_KEY_EMOTICON3);
     setDefaultIfInvalid(_keymap.emoticon4, DEFAULT_KEY_EMOTICON4);
     setDefaultIfInvalid(_keymap.emoticon5, DEFAULT_KEY_EMOTICON5);
+}
 
-    KeymapConfig _keymapConfig = KeymapConfig(&_keymap);
-    Global::instance = new Global();
-    Global::instance->keymap = _keymapConfig;
-  }
-
-  return instance;
+// Singleton instance method
+Global* Global::getInstance() {
+    static Global instance;  // Direct initialization of static instance
+    return &instance;
 }
