@@ -1,6 +1,6 @@
-import 'package:configurator/const/config.dart';
-import 'package:configurator/const/keycode.dart';
-import 'package:configurator/classes/key_config.dart';
+import 'package:configurator/build_config.dart';
+import 'package:configurator/models/keycode.dart';
+import 'package:configurator/models/key_config.dart';
 
 class Globals {
   late KeyConfig keyConfig;
@@ -13,115 +13,119 @@ class Globals {
 
   Globals._privateConstructor() {
     KeyConfig loaded = KeyConfig(
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined,
-        Key.undefined);
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined,
+        Keycode.undefined);
     // Load from Arduino
     keyConfig = KeyConfig(
-        loaded.esc != Key.undefined ? loaded.esc : Config.defaultKeyConfig.esc,
-        loaded.enter != Key.undefined
+        loaded.esc != Keycode.undefined
+            ? loaded.esc
+            : BuildConfig.defaultKeyConfig.esc,
+        loaded.enter != Keycode.undefined
             ? loaded.enter
-            : Config.defaultKeyConfig.enter,
-        loaded.tab != Key.undefined ? loaded.tab : Config.defaultKeyConfig.tab,
-        loaded.space != Key.undefined
+            : BuildConfig.defaultKeyConfig.enter,
+        loaded.tab != Keycode.undefined
+            ? loaded.tab
+            : BuildConfig.defaultKeyConfig.tab,
+        loaded.space != Keycode.undefined
             ? loaded.space
-            : Config.defaultKeyConfig.space,
-        loaded.speedUp != Key.undefined
+            : BuildConfig.defaultKeyConfig.space,
+        loaded.speedUp != Keycode.undefined
             ? loaded.speedUp
-            : Config.defaultKeyConfig.speedUp,
-        loaded.speedDown != Key.undefined
+            : BuildConfig.defaultKeyConfig.speedUp,
+        loaded.speedDown != Keycode.undefined
             ? loaded.speedDown
-            : Config.defaultKeyConfig.speedDown,
-        loaded.rewind != Key.undefined
+            : BuildConfig.defaultKeyConfig.speedDown,
+        loaded.rewind != Keycode.undefined
             ? loaded.rewind
-            : Config.defaultKeyConfig.rewind,
-        loaded.leftShift != Key.undefined
+            : BuildConfig.defaultKeyConfig.rewind,
+        loaded.leftShift != Keycode.undefined
             ? loaded.leftShift
-            : Config.defaultKeyConfig.leftShift,
-        loaded.rightShift != Key.undefined
+            : BuildConfig.defaultKeyConfig.leftShift,
+        loaded.rightShift != Keycode.undefined
             ? loaded.rightShift
-            : Config.defaultKeyConfig.rightShift,
-        loaded.arrowUp != Key.undefined
+            : BuildConfig.defaultKeyConfig.rightShift,
+        loaded.arrowUp != Keycode.undefined
             ? loaded.arrowUp
-            : Config.defaultKeyConfig.arrowUp,
-        loaded.arrowDown != Key.undefined
+            : BuildConfig.defaultKeyConfig.arrowUp,
+        loaded.arrowDown != Keycode.undefined
             ? loaded.arrowDown
-            : Config.defaultKeyConfig.arrowDown,
-        loaded.arrowLeft != Key.undefined
+            : BuildConfig.defaultKeyConfig.arrowDown,
+        loaded.arrowLeft != Keycode.undefined
             ? loaded.arrowLeft
-            : Config.defaultKeyConfig.arrowLeft,
-        loaded.arrowRight != Key.undefined
+            : BuildConfig.defaultKeyConfig.arrowLeft,
+        loaded.arrowRight != Keycode.undefined
             ? loaded.arrowRight
-            : Config.defaultKeyConfig.arrowRight,
-        loaded.tuneLeftSide != Key.undefined
+            : BuildConfig.defaultKeyConfig.arrowRight,
+        loaded.tuneLeftSide != Keycode.undefined
             ? loaded.tuneLeftSide
-            : Config.defaultKeyConfig.tuneLeftSide,
-        loaded.tuneS != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneLeftSide,
+        loaded.tuneS != Keycode.undefined
             ? loaded.tuneS
-            : Config.defaultKeyConfig.tuneS,
-        loaded.tuneD != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneS,
+        loaded.tuneD != Keycode.undefined
             ? loaded.tuneD
-            : Config.defaultKeyConfig.tuneD,
-        loaded.tuneF != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneD,
+        loaded.tuneF != Keycode.undefined
             ? loaded.tuneF
-            : Config.defaultKeyConfig.tuneF,
-        loaded.tuneC != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneF,
+        loaded.tuneC != Keycode.undefined
             ? loaded.tuneC
-            : Config.defaultKeyConfig.tuneC,
-        loaded.tuneM != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneC,
+        loaded.tuneM != Keycode.undefined
             ? loaded.tuneM
-            : Config.defaultKeyConfig.tuneM,
-        loaded.tuneJ != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneM,
+        loaded.tuneJ != Keycode.undefined
             ? loaded.tuneJ
-            : Config.defaultKeyConfig.tuneJ,
-        loaded.tuneK != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneJ,
+        loaded.tuneK != Keycode.undefined
             ? loaded.tuneK
-            : Config.defaultKeyConfig.tuneK,
-        loaded.tuneL != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneK,
+        loaded.tuneL != Keycode.undefined
             ? loaded.tuneL
-            : Config.defaultKeyConfig.tuneL,
-        loaded.tuneRightSide != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneL,
+        loaded.tuneRightSide != Keycode.undefined
             ? loaded.tuneRightSide
-            : Config.defaultKeyConfig.tuneRightSide,
-        loaded.emoticon1 != Key.undefined
+            : BuildConfig.defaultKeyConfig.tuneRightSide,
+        loaded.emoticon1 != Keycode.undefined
             ? loaded.emoticon1
-            : Config.defaultKeyConfig.emoticon1,
-        loaded.emoticon2 != Key.undefined
+            : BuildConfig.defaultKeyConfig.emoticon1,
+        loaded.emoticon2 != Keycode.undefined
             ? loaded.emoticon2
-            : Config.defaultKeyConfig.emoticon2,
-        loaded.emoticon3 != Key.undefined
+            : BuildConfig.defaultKeyConfig.emoticon2,
+        loaded.emoticon3 != Keycode.undefined
             ? loaded.emoticon3
-            : Config.defaultKeyConfig.emoticon3,
-        loaded.emoticon4 != Key.undefined
+            : BuildConfig.defaultKeyConfig.emoticon3,
+        loaded.emoticon4 != Keycode.undefined
             ? loaded.emoticon4
-            : Config.defaultKeyConfig.emoticon4,
-        loaded.emoticon5 != Key.undefined
+            : BuildConfig.defaultKeyConfig.emoticon4,
+        loaded.emoticon5 != Keycode.undefined
             ? loaded.emoticon5
-            : Config.defaultKeyConfig.emoticon5);
+            : BuildConfig.defaultKeyConfig.emoticon5);
   }
 }
