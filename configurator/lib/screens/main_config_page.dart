@@ -1,3 +1,4 @@
+import 'package:configurator/components/device_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:configurator/components/key_config_list.dart';
 
@@ -19,6 +20,8 @@ class _MainConfigPageState extends State<MainConfigPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(alignment: Alignment.center, child: 
+              DeviceSelector(),),
               Text(
                 'Key Configuration',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

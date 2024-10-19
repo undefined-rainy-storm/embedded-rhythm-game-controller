@@ -2,7 +2,6 @@ import 'package:configurator/widgets/key_detect_field.dart';
 import 'package:flutter/material.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/globals.dart';
-import 'dart:developer';
 
 class KeyConfigListItemContainer {
   KeyConfigListItemContainer(
