@@ -1,3 +1,4 @@
+import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/key_config.dart';
 
@@ -6,6 +7,7 @@ class BuildConfig {
   static const serialBits = 8;
   static const serialStopBits = 1;
   static const serialParity = null;
+  static const serialFlowControl = SerialPortFlowControl.none;
 
   static KeyConfig defaultKeyConfig = KeyConfig(
     Keycode.esc,

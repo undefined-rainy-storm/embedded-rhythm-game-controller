@@ -4,6 +4,7 @@ import 'package:configurator/models/key_config.dart';
 
 class Globals {
   late KeyConfig keyConfig;
+  late String currentSerialDevicePort;
 
   static Globals instance = Globals._privateConstructor();
 

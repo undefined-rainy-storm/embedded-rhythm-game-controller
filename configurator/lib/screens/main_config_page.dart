@@ -20,8 +20,10 @@ class _MainConfigPageState extends State<MainConfigPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(alignment: Alignment.center, child: 
-              DeviceSelector(),),
+              Align(
+                alignment: Alignment.center,
+                child: DeviceSelector(),
+              ),
               Text(
                 'Key Configuration',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
