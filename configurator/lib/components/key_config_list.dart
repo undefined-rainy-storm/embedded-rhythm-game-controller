@@ -1,14 +1,16 @@
+import 'package:configurator/widgets/key_detect_field.dart';
 import 'package:flutter/material.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/globals.dart';
-import 'package:flutter/rendering.dart';
+import 'dart:developer';
 
 class KeyConfigListItemContainer {
   KeyConfigListItemContainer(
-      {required this.name, this.enabled = false, this.key = Keycode.undefined});
+      {required this.name, this.enabled = false, this.key = Keycode.undefined, this.handler});
   String name;
   bool enabled;
   Keycode key;
+  final Null Function(Keycode)? handler;
 }
 
 class KeyConfigList extends StatefulWidget {
@@ -22,7 +24,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
   final List<KeyConfigListItemContainer> keyConfigListItemContainers =
       <KeyConfigListItemContainer>[
     KeyConfigListItemContainer(
-        name: 'Esc', key: Globals.instance.keyConfig.esc),
+        name: 'Esc', key: Globals.instance.keyConfig.esc,
+        handler: (code) { Globals.instance.keyConfig.esc = code; }),
     KeyConfigListItemContainer(
         name: 'Enter', key: Globals.instance.keyConfig.esc),
     KeyConfigListItemContainer(
@@ -79,41 +82,57 @@ class _KeyConfigListState extends State<KeyConfigList> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [],
-      ),
+    return ListView(
+      children: keyConfigListItemContainers
+          .map<Widget>((KeyConfigListItemContainer container) {
+        return KeyConfigListItem(container: container);
+      }).toList(),
     );
   }
+}
 
-  Widget _buildPanels() {
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          keyConfigListItemContainers[index].enabled = isExpanded;
-        });
-      },
-      children: keyConfigListItemContainers
-          .map<ExpansionPanel>((KeyConfigListItemContainer container) {
-        return ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              title: Text(container.name),
-            );
+class KeyConfigListItem extends StatefulWidget {
+  final KeyConfigListItemContainer container;
+  const KeyConfigListItem({super.key, required this.container});
+
+  @override
+  State<KeyConfigListItem> createState() => _KeyConfigListItemState();
+}
+
+class _KeyConfigListItemState extends State<KeyConfigListItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SwitchListTile(
+          title: Text(widget.container.name),
+          value: widget.container.enabled,
+          onChanged: (value) {
+            setState(() {
+              widget.container.enabled = value;
+            });
           },
-          body: ListTile(
-              title: Text('asdf'),
-              subtitle:
-                  const Text('To delete this panel, tap the trash can icon'),
-              trailing: const Icon(Icons.delete),
-              onTap: () {
-                setState(() {
-                  //_data.removeWhere((Item currentItem) => item == currentItem);
-                });
-              }),
-          isExpanded: container.enabled,
-        );
-      }).toList(),
+        ),
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          height: widget.container.enabled ? 100.0 : 0.0,
+          alignment: Alignment.centerLeft,
+          child: widget.container.enabled
+              ? Container(
+                  color: Colors.blue[100], // Optional background color
+                  padding: EdgeInsets.all(16.0),
+                  child: KeyDetectField(
+                    callbackFunc: (Keycode code) {
+                      widget.container.handler?.call(code);
+                      widget.container.key = code;
+                      Globals.instance.keyConfig.arrowDown = code;
+                      print(Globals.instance.keyConfig.arrowDown);
+                    },
+                  ),
+                )
+              : SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }

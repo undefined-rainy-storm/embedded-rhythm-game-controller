@@ -98,7 +98,7 @@ enum Keycode {
   undefined
 }
 
-class Arduino {
+class ArduinoKeycode {
   static const int leftCtrl = 0x80;
   static const int leftShift = 0x81;
   static const int leftAlt = 0x82;
@@ -197,193 +197,193 @@ class Arduino {
 
   static Keycode toKey(int code) {
     switch (code) {
-      case Arduino.leftCtrl:
+      case ArduinoKeycode.leftCtrl:
         return Keycode.leftCtrl;
-      case Arduino.leftShift:
+      case ArduinoKeycode.leftShift:
         return Keycode.leftShift;
-      case Arduino.leftAlt:
+      case ArduinoKeycode.leftAlt:
         return Keycode.leftAlt;
-      case Arduino.leftGui:
+      case ArduinoKeycode.leftGui:
         return Keycode.leftGui;
-      case Arduino.rightCtrl:
+      case ArduinoKeycode.rightCtrl:
         return Keycode.rightCtrl;
-      case Arduino.rightShift:
+      case ArduinoKeycode.rightShift:
         return Keycode.rightShift;
-      case Arduino.rightAlt:
+      case ArduinoKeycode.rightAlt:
         return Keycode.rightAlt;
-      case Arduino.rightGui:
+      case ArduinoKeycode.rightGui:
         return Keycode.rightGui;
-      case Arduino.tab:
+      case ArduinoKeycode.tab:
         return Keycode.tab;
-      case Arduino.capslock:
+      case ArduinoKeycode.capslock:
         return Keycode.capslock;
-      case Arduino.backspace:
+      case ArduinoKeycode.backspace:
         return Keycode.backspace;
-      case Arduino.enter:
+      case ArduinoKeycode.enter:
         return Keycode.enter;
-      case Arduino.menu:
+      case ArduinoKeycode.menu:
         return Keycode.menu;
-      case Arduino.insert:
+      case ArduinoKeycode.insert:
         return Keycode.insert;
-      case Arduino.delete:
+      case ArduinoKeycode.delete:
         return Keycode.delete;
-      case Arduino.home:
+      case ArduinoKeycode.home:
         return Keycode.home;
-      case Arduino.end:
+      case ArduinoKeycode.end:
         return Keycode.end;
-      case Arduino.pageUp:
+      case ArduinoKeycode.pageUp:
         return Keycode.pageUp;
-      case Arduino.pageDown:
+      case ArduinoKeycode.pageDown:
         return Keycode.pageDown;
-      case Arduino.upArrow:
+      case ArduinoKeycode.upArrow:
         return Keycode.upArrow;
-      case Arduino.downArrow:
+      case ArduinoKeycode.downArrow:
         return Keycode.downArrow;
-      case Arduino.leftArrow:
+      case ArduinoKeycode.leftArrow:
         return Keycode.leftArrow;
-      case Arduino.rightArrow:
+      case ArduinoKeycode.rightArrow:
         return Keycode.rightArrow;
-      case Arduino.numLock:
+      case ArduinoKeycode.numLock:
         return Keycode.numLock;
-      case Arduino.kpSlash:
+      case ArduinoKeycode.kpSlash:
         return Keycode.kpSlash;
-      case Arduino.kpAsterisk:
+      case ArduinoKeycode.kpAsterisk:
         return Keycode.kpAsterisk;
-      case Arduino.kpMinus:
+      case ArduinoKeycode.kpMinus:
         return Keycode.kpMinus;
-      case Arduino.kpPlus:
+      case ArduinoKeycode.kpPlus:
         return Keycode.kpPlus;
-      case Arduino.kpEnter:
+      case ArduinoKeycode.kpEnter:
         return Keycode.kpEnter;
-      case Arduino.kp1:
+      case ArduinoKeycode.kp1:
         return Keycode.kp1;
-      case Arduino.kp2:
+      case ArduinoKeycode.kp2:
         return Keycode.kp2;
-      case Arduino.kp3:
+      case ArduinoKeycode.kp3:
         return Keycode.kp3;
-      case Arduino.kp4:
+      case ArduinoKeycode.kp4:
         return Keycode.kp4;
-      case Arduino.kp5:
+      case ArduinoKeycode.kp5:
         return Keycode.kp5;
-      case Arduino.kp6:
+      case ArduinoKeycode.kp6:
         return Keycode.kp6;
-      case Arduino.kp7:
+      case ArduinoKeycode.kp7:
         return Keycode.kp7;
-      case Arduino.kp8:
+      case ArduinoKeycode.kp8:
         return Keycode.kp8;
-      case Arduino.kp9:
+      case ArduinoKeycode.kp9:
         return Keycode.kp9;
-      case Arduino.kp0:
+      case ArduinoKeycode.kp0:
         return Keycode.kp0;
-      case Arduino.kpDot:
+      case ArduinoKeycode.kpDot:
         return Keycode.kpDot;
-      case Arduino.esc:
+      case ArduinoKeycode.esc:
         return Keycode.esc;
-      case Arduino.f1:
+      case ArduinoKeycode.f1:
         return Keycode.f1;
-      case Arduino.f2:
+      case ArduinoKeycode.f2:
         return Keycode.f2;
-      case Arduino.f3:
+      case ArduinoKeycode.f3:
         return Keycode.f3;
-      case Arduino.f4:
+      case ArduinoKeycode.f4:
         return Keycode.f4;
-      case Arduino.f5:
+      case ArduinoKeycode.f5:
         return Keycode.f5;
-      case Arduino.f6:
+      case ArduinoKeycode.f6:
         return Keycode.f6;
-      case Arduino.f7:
+      case ArduinoKeycode.f7:
         return Keycode.f7;
-      case Arduino.f8:
+      case ArduinoKeycode.f8:
         return Keycode.f8;
-      case Arduino.f9:
+      case ArduinoKeycode.f9:
         return Keycode.f9;
-      case Arduino.f10:
+      case ArduinoKeycode.f10:
         return Keycode.f10;
-      case Arduino.f11:
+      case ArduinoKeycode.f11:
         return Keycode.f11;
-      case Arduino.f12:
+      case ArduinoKeycode.f12:
         return Keycode.f12;
-      case Arduino.f13:
+      case ArduinoKeycode.f13:
         return Keycode.f13;
-      case Arduino.f14:
+      case ArduinoKeycode.f14:
         return Keycode.f14;
-      case Arduino.f15:
+      case ArduinoKeycode.f15:
         return Keycode.f15;
-      case Arduino.f16:
+      case ArduinoKeycode.f16:
         return Keycode.f16;
-      case Arduino.f17:
+      case ArduinoKeycode.f17:
         return Keycode.f17;
-      case Arduino.f18:
+      case ArduinoKeycode.f18:
         return Keycode.f18;
-      case Arduino.f19:
+      case ArduinoKeycode.f19:
         return Keycode.f19;
-      case Arduino.f20:
+      case ArduinoKeycode.f20:
         return Keycode.f20;
-      case Arduino.f21:
+      case ArduinoKeycode.f21:
         return Keycode.f21;
-      case Arduino.f22:
+      case ArduinoKeycode.f22:
         return Keycode.f22;
-      case Arduino.f23:
+      case ArduinoKeycode.f23:
         return Keycode.f23;
-      case Arduino.f24:
+      case ArduinoKeycode.f24:
         return Keycode.f24;
-      case Arduino.printScreen:
+      case ArduinoKeycode.printScreen:
         return Keycode.printScreen;
-      case Arduino.scrollLock:
+      case ArduinoKeycode.scrollLock:
         return Keycode.scrollLock;
-      case Arduino.pause:
+      case ArduinoKeycode.pause:
         return Keycode.pause;
-      case Arduino.a:
+      case ArduinoKeycode.a:
         return Keycode.a;
-      case Arduino.b:
+      case ArduinoKeycode.b:
         return Keycode.b;
-      case Arduino.c:
+      case ArduinoKeycode.c:
         return Keycode.c;
-      case Arduino.d:
+      case ArduinoKeycode.d:
         return Keycode.d;
-      case Arduino.e:
+      case ArduinoKeycode.e:
         return Keycode.e;
-      case Arduino.f:
+      case ArduinoKeycode.f:
         return Keycode.f;
-      case Arduino.g:
+      case ArduinoKeycode.g:
         return Keycode.g;
-      case Arduino.h:
+      case ArduinoKeycode.h:
         return Keycode.h;
-      case Arduino.i:
+      case ArduinoKeycode.i:
         return Keycode.i;
-      case Arduino.j:
+      case ArduinoKeycode.j:
         return Keycode.j;
-      case Arduino.k:
+      case ArduinoKeycode.k:
         return Keycode.k;
-      case Arduino.l:
+      case ArduinoKeycode.l:
         return Keycode.l;
-      case Arduino.m:
+      case ArduinoKeycode.m:
         return Keycode.m;
-      case Arduino.n:
+      case ArduinoKeycode.n:
         return Keycode.n;
-      case Arduino.o:
+      case ArduinoKeycode.o:
         return Keycode.o;
-      case Arduino.p:
+      case ArduinoKeycode.p:
         return Keycode.p;
-      case Arduino.q:
+      case ArduinoKeycode.q:
         return Keycode.q;
-      case Arduino.r:
+      case ArduinoKeycode.r:
         return Keycode.r;
-      case Arduino.s:
+      case ArduinoKeycode.s:
         return Keycode.s;
-      case Arduino.t:
+      case ArduinoKeycode.t:
         return Keycode.t;
-      case Arduino.u:
+      case ArduinoKeycode.u:
         return Keycode.u;
-      case Arduino.v:
+      case ArduinoKeycode.v:
         return Keycode.v;
-      case Arduino.w:
+      case ArduinoKeycode.w:
         return Keycode.w;
-      case Arduino.x:
+      case ArduinoKeycode.x:
         return Keycode.x;
-      case Arduino.y:
+      case ArduinoKeycode.y:
         return Keycode.y;
-      case Arduino.z:
+      case ArduinoKeycode.z:
         return Keycode.z;
       default:
         return Keycode.undefined;
@@ -391,7 +391,7 @@ class Arduino {
   }
 }
 
-class Flutter {
+class FlutterKeycode {
   static int leftCtrl = LogicalKeyboardKey.controlLeft.hashCode;
   static int leftShift = LogicalKeyboardKey.shiftLeft.hashCode;
   static int leftAlt = LogicalKeyboardKey.altLeft.hashCode;
@@ -487,485 +487,485 @@ class Flutter {
   static int y = LogicalKeyboardKey.keyY.hashCode;
   static int z = LogicalKeyboardKey.keyZ.hashCode;
 
-  static Keycode toKey(int code) {
-    if (code == Flutter.leftCtrl) {
+  static Keycode toKeycode(int code) {
+    if (code == FlutterKeycode.leftCtrl) {
       return Keycode.leftCtrl;
     }
-    if (code == Flutter.leftShift) {
+    if (code == FlutterKeycode.leftShift) {
       return Keycode.leftShift;
     }
-    if (code == Flutter.leftAlt) {
+    if (code == FlutterKeycode.leftAlt) {
       return Keycode.leftAlt;
     }
-    if (code == Flutter.leftGui) {
+    if (code == FlutterKeycode.leftGui) {
       return Keycode.leftGui;
     }
-    if (code == Flutter.rightCtrl) {
+    if (code == FlutterKeycode.rightCtrl) {
       return Keycode.rightCtrl;
     }
-    if (code == Flutter.rightShift) {
+    if (code == FlutterKeycode.rightShift) {
       return Keycode.rightShift;
     }
-    if (code == Flutter.rightAlt) {
+    if (code == FlutterKeycode.rightAlt) {
       return Keycode.rightAlt;
     }
-    if (code == Flutter.rightGui) {
+    if (code == FlutterKeycode.rightGui) {
       return Keycode.rightGui;
     }
-    if (code == Flutter.tab) {
+    if (code == FlutterKeycode.tab) {
       return Keycode.tab;
     }
-    if (code == Flutter.capslock) {
+    if (code == FlutterKeycode.capslock) {
       return Keycode.capslock;
     }
-    if (code == Flutter.backspace) {
+    if (code == FlutterKeycode.backspace) {
       return Keycode.backspace;
     }
-    if (code == Flutter.enter) {
+    if (code == FlutterKeycode.enter) {
       return Keycode.enter;
     }
-    if (code == Flutter.menu) {
+    if (code == FlutterKeycode.menu) {
       return Keycode.menu;
     }
-    if (code == Flutter.insert) {
+    if (code == FlutterKeycode.insert) {
       return Keycode.insert;
     }
-    if (code == Flutter.delete) {
+    if (code == FlutterKeycode.delete) {
       return Keycode.delete;
     }
-    if (code == Flutter.home) {
+    if (code == FlutterKeycode.home) {
       return Keycode.home;
     }
-    if (code == Flutter.end) {
+    if (code == FlutterKeycode.end) {
       return Keycode.end;
     }
-    if (code == Flutter.pageUp) {
+    if (code == FlutterKeycode.pageUp) {
       return Keycode.pageUp;
     }
-    if (code == Flutter.pageDown) {
+    if (code == FlutterKeycode.pageDown) {
       return Keycode.pageDown;
     }
-    if (code == Flutter.upArrow) {
+    if (code == FlutterKeycode.upArrow) {
       return Keycode.upArrow;
     }
-    if (code == Flutter.downArrow) {
+    if (code == FlutterKeycode.downArrow) {
       return Keycode.downArrow;
     }
-    if (code == Flutter.leftArrow) {
+    if (code == FlutterKeycode.leftArrow) {
       return Keycode.leftArrow;
     }
-    if (code == Flutter.rightArrow) {
+    if (code == FlutterKeycode.rightArrow) {
       return Keycode.rightArrow;
     }
-    if (code == Flutter.numLock) {
+    if (code == FlutterKeycode.numLock) {
       return Keycode.numLock;
     }
-    if (code == Flutter.kpSlash) {
+    if (code == FlutterKeycode.kpSlash) {
       return Keycode.kpSlash;
     }
-    if (code == Flutter.kpAsterisk) {
+    if (code == FlutterKeycode.kpAsterisk) {
       return Keycode.kpAsterisk;
     }
-    if (code == Flutter.kpMinus) {
+    if (code == FlutterKeycode.kpMinus) {
       return Keycode.kpMinus;
     }
-    if (code == Flutter.kpPlus) {
+    if (code == FlutterKeycode.kpPlus) {
       return Keycode.kpPlus;
     }
-    if (code == Flutter.kpEnter) {
+    if (code == FlutterKeycode.kpEnter) {
       return Keycode.kpEnter;
     }
-    if (code == Flutter.kp1) {
+    if (code == FlutterKeycode.kp1) {
       return Keycode.kp1;
     }
-    if (code == Flutter.kp2) {
+    if (code == FlutterKeycode.kp2) {
       return Keycode.kp2;
     }
-    if (code == Flutter.kp3) {
+    if (code == FlutterKeycode.kp3) {
       return Keycode.kp3;
     }
-    if (code == Flutter.kp4) {
+    if (code == FlutterKeycode.kp4) {
       return Keycode.kp4;
     }
-    if (code == Flutter.kp5) {
+    if (code == FlutterKeycode.kp5) {
       return Keycode.kp5;
     }
-    if (code == Flutter.kp6) {
+    if (code == FlutterKeycode.kp6) {
       return Keycode.kp6;
     }
-    if (code == Flutter.kp7) {
+    if (code == FlutterKeycode.kp7) {
       return Keycode.kp7;
     }
-    if (code == Flutter.kp8) {
+    if (code == FlutterKeycode.kp8) {
       return Keycode.kp8;
     }
-    if (code == Flutter.kp9) {
+    if (code == FlutterKeycode.kp9) {
       return Keycode.kp9;
     }
-    if (code == Flutter.kp0) {
+    if (code == FlutterKeycode.kp0) {
       return Keycode.kp0;
     }
-    if (code == Flutter.kpDot) {
+    if (code == FlutterKeycode.kpDot) {
       return Keycode.kpDot;
     }
-    if (code == Flutter.esc) {
+    if (code == FlutterKeycode.esc) {
       return Keycode.esc;
     }
-    if (code == Flutter.f1) {
+    if (code == FlutterKeycode.f1) {
       return Keycode.f1;
     }
-    if (code == Flutter.f2) {
+    if (code == FlutterKeycode.f2) {
       return Keycode.f2;
     }
-    if (code == Flutter.f3) {
+    if (code == FlutterKeycode.f3) {
       return Keycode.f3;
     }
-    if (code == Flutter.f4) {
+    if (code == FlutterKeycode.f4) {
       return Keycode.f4;
     }
-    if (code == Flutter.f5) {
+    if (code == FlutterKeycode.f5) {
       return Keycode.f5;
     }
-    if (code == Flutter.f6) {
+    if (code == FlutterKeycode.f6) {
       return Keycode.f6;
     }
-    if (code == Flutter.f7) {
+    if (code == FlutterKeycode.f7) {
       return Keycode.f7;
     }
-    if (code == Flutter.f8) {
+    if (code == FlutterKeycode.f8) {
       return Keycode.f8;
     }
-    if (code == Flutter.f9) {
+    if (code == FlutterKeycode.f9) {
       return Keycode.f9;
     }
-    if (code == Flutter.f10) {
+    if (code == FlutterKeycode.f10) {
       return Keycode.f10;
     }
-    if (code == Flutter.f11) {
+    if (code == FlutterKeycode.f11) {
       return Keycode.f11;
     }
-    if (code == Flutter.f12) {
+    if (code == FlutterKeycode.f12) {
       return Keycode.f12;
     }
-    if (code == Flutter.f13) {
+    if (code == FlutterKeycode.f13) {
       return Keycode.f13;
     }
-    if (code == Flutter.f14) {
+    if (code == FlutterKeycode.f14) {
       return Keycode.f14;
     }
-    if (code == Flutter.f15) {
+    if (code == FlutterKeycode.f15) {
       return Keycode.f15;
     }
-    if (code == Flutter.f16) {
+    if (code == FlutterKeycode.f16) {
       return Keycode.f16;
     }
-    if (code == Flutter.f17) {
+    if (code == FlutterKeycode.f17) {
       return Keycode.f17;
     }
-    if (code == Flutter.f18) {
+    if (code == FlutterKeycode.f18) {
       return Keycode.f18;
     }
-    if (code == Flutter.f19) {
+    if (code == FlutterKeycode.f19) {
       return Keycode.f19;
     }
-    if (code == Flutter.f20) {
+    if (code == FlutterKeycode.f20) {
       return Keycode.f20;
     }
-    if (code == Flutter.f21) {
+    if (code == FlutterKeycode.f21) {
       return Keycode.f21;
     }
-    if (code == Flutter.f22) {
+    if (code == FlutterKeycode.f22) {
       return Keycode.f22;
     }
-    if (code == Flutter.f23) {
+    if (code == FlutterKeycode.f23) {
       return Keycode.f23;
     }
-    if (code == Flutter.f24) {
+    if (code == FlutterKeycode.f24) {
       return Keycode.f24;
     }
-    if (code == Flutter.printScreen) {
+    if (code == FlutterKeycode.printScreen) {
       return Keycode.printScreen;
     }
-    if (code == Flutter.scrollLock) {
+    if (code == FlutterKeycode.scrollLock) {
       return Keycode.scrollLock;
     }
-    if (code == Flutter.pause) {
+    if (code == FlutterKeycode.pause) {
       return Keycode.pause;
     }
-    if (code == Flutter.a) {
+    if (code == FlutterKeycode.a) {
       return Keycode.a;
     }
-    if (code == Flutter.b) {
+    if (code == FlutterKeycode.b) {
       return Keycode.b;
     }
-    if (code == Flutter.c) {
+    if (code == FlutterKeycode.c) {
       return Keycode.c;
     }
-    if (code == Flutter.d) {
+    if (code == FlutterKeycode.d) {
       return Keycode.d;
     }
-    if (code == Flutter.e) {
+    if (code == FlutterKeycode.e) {
       return Keycode.e;
     }
-    if (code == Flutter.f) {
+    if (code == FlutterKeycode.f) {
       return Keycode.f;
     }
-    if (code == Flutter.g) {
+    if (code == FlutterKeycode.g) {
       return Keycode.g;
     }
-    if (code == Flutter.h) {
+    if (code == FlutterKeycode.h) {
       return Keycode.h;
     }
-    if (code == Flutter.i) {
+    if (code == FlutterKeycode.i) {
       return Keycode.i;
     }
-    if (code == Flutter.j) {
+    if (code == FlutterKeycode.j) {
       return Keycode.j;
     }
-    if (code == Flutter.k) {
+    if (code == FlutterKeycode.k) {
       return Keycode.k;
     }
-    if (code == Flutter.l) {
+    if (code == FlutterKeycode.l) {
       return Keycode.l;
     }
-    if (code == Flutter.m) {
+    if (code == FlutterKeycode.m) {
       return Keycode.m;
     }
-    if (code == Flutter.n) {
+    if (code == FlutterKeycode.n) {
       return Keycode.n;
     }
-    if (code == Flutter.o) {
+    if (code == FlutterKeycode.o) {
       return Keycode.o;
     }
-    if (code == Flutter.p) {
+    if (code == FlutterKeycode.p) {
       return Keycode.p;
     }
-    if (code == Flutter.q) {
+    if (code == FlutterKeycode.q) {
       return Keycode.q;
     }
-    if (code == Flutter.r) {
+    if (code == FlutterKeycode.r) {
       return Keycode.r;
     }
-    if (code == Flutter.s) {
+    if (code == FlutterKeycode.s) {
       return Keycode.s;
     }
-    if (code == Flutter.t) {
+    if (code == FlutterKeycode.t) {
       return Keycode.t;
     }
-    if (code == Flutter.u) {
+    if (code == FlutterKeycode.u) {
       return Keycode.u;
     }
-    if (code == Flutter.v) {
+    if (code == FlutterKeycode.v) {
       return Keycode.v;
     }
-    if (code == Flutter.w) {
+    if (code == FlutterKeycode.w) {
       return Keycode.w;
     }
-    if (code == Flutter.x) {
+    if (code == FlutterKeycode.x) {
       return Keycode.x;
     }
-    if (code == Flutter.y) {
+    if (code == FlutterKeycode.y) {
       return Keycode.y;
     }
-    if (code == Flutter.z) {
+    if (code == FlutterKeycode.z) {
       return Keycode.z;
     }
     return Keycode.undefined;
   }
 }
 
-Map<Keycode, int> keyToArduino = {
-  Keycode.leftCtrl: Arduino.leftCtrl,
-  Keycode.leftShift: Arduino.leftShift,
-  Keycode.leftAlt: Arduino.leftAlt,
-  Keycode.leftGui: Arduino.leftGui,
-  Keycode.rightCtrl: Arduino.rightCtrl,
-  Keycode.rightShift: Arduino.rightShift,
-  Keycode.rightAlt: Arduino.rightAlt,
-  Keycode.rightGui: Arduino.rightGui,
-  Keycode.tab: Arduino.tab,
-  Keycode.capslock: Arduino.capslock,
-  Keycode.backspace: Arduino.backspace,
-  Keycode.enter: Arduino.enter,
-  Keycode.menu: Arduino.menu,
-  Keycode.insert: Arduino.insert,
-  Keycode.delete: Arduino.delete,
-  Keycode.home: Arduino.home,
-  Keycode.end: Arduino.end,
-  Keycode.pageUp: Arduino.pageUp,
-  Keycode.pageDown: Arduino.pageDown,
-  Keycode.upArrow: Arduino.upArrow,
-  Keycode.downArrow: Arduino.downArrow,
-  Keycode.leftArrow: Arduino.leftArrow,
-  Keycode.rightArrow: Arduino.rightArrow,
-  Keycode.numLock: Arduino.numLock,
-  Keycode.kpSlash: Arduino.kpSlash,
-  Keycode.kpAsterisk: Arduino.kpAsterisk,
-  Keycode.kpMinus: Arduino.kpMinus,
-  Keycode.kpPlus: Arduino.kpPlus,
-  Keycode.kpEnter: Arduino.kpEnter,
-  Keycode.kp1: Arduino.kp1,
-  Keycode.kp2: Arduino.kp2,
-  Keycode.kp3: Arduino.kp3,
-  Keycode.kp4: Arduino.kp4,
-  Keycode.kp5: Arduino.kp5,
-  Keycode.kp6: Arduino.kp6,
-  Keycode.kp7: Arduino.kp7,
-  Keycode.kp8: Arduino.kp8,
-  Keycode.kp9: Arduino.kp9,
-  Keycode.kp0: Arduino.kp0,
-  Keycode.kpDot: Arduino.kpDot,
-  Keycode.esc: Arduino.esc,
-  Keycode.f1: Arduino.f1,
-  Keycode.f2: Arduino.f2,
-  Keycode.f3: Arduino.f3,
-  Keycode.f4: Arduino.f4,
-  Keycode.f5: Arduino.f5,
-  Keycode.f6: Arduino.f6,
-  Keycode.f7: Arduino.f7,
-  Keycode.f8: Arduino.f8,
-  Keycode.f9: Arduino.f9,
-  Keycode.f10: Arduino.f10,
-  Keycode.f11: Arduino.f11,
-  Keycode.f12: Arduino.f12,
-  Keycode.f13: Arduino.f13,
-  Keycode.f14: Arduino.f14,
-  Keycode.f15: Arduino.f15,
-  Keycode.f16: Arduino.f16,
-  Keycode.f17: Arduino.f17,
-  Keycode.f18: Arduino.f18,
-  Keycode.f19: Arduino.f19,
-  Keycode.f20: Arduino.f20,
-  Keycode.f21: Arduino.f21,
-  Keycode.f22: Arduino.f22,
-  Keycode.f23: Arduino.f23,
-  Keycode.f24: Arduino.f24,
-  Keycode.printScreen: Arduino.printScreen,
-  Keycode.scrollLock: Arduino.scrollLock,
-  Keycode.pause: Arduino.pause,
-  Keycode.a: Arduino.a,
-  Keycode.b: Arduino.b,
-  Keycode.c: Arduino.c,
-  Keycode.d: Arduino.d,
-  Keycode.e: Arduino.e,
-  Keycode.f: Arduino.f,
-  Keycode.g: Arduino.g,
-  Keycode.h: Arduino.h,
-  Keycode.i: Arduino.i,
-  Keycode.j: Arduino.j,
-  Keycode.k: Arduino.k,
-  Keycode.l: Arduino.l,
-  Keycode.m: Arduino.m,
-  Keycode.n: Arduino.n,
-  Keycode.o: Arduino.o,
-  Keycode.p: Arduino.p,
-  Keycode.q: Arduino.q,
-  Keycode.r: Arduino.r,
-  Keycode.s: Arduino.s,
-  Keycode.t: Arduino.t,
-  Keycode.u: Arduino.u,
-  Keycode.v: Arduino.v,
-  Keycode.w: Arduino.w,
-  Keycode.x: Arduino.x,
-  Keycode.y: Arduino.y,
-  Keycode.z: Arduino.z,
+Map<Keycode, int> keyToArduinoKeycode = {
+  Keycode.leftCtrl: ArduinoKeycode.leftCtrl,
+  Keycode.leftShift: ArduinoKeycode.leftShift,
+  Keycode.leftAlt: ArduinoKeycode.leftAlt,
+  Keycode.leftGui: ArduinoKeycode.leftGui,
+  Keycode.rightCtrl: ArduinoKeycode.rightCtrl,
+  Keycode.rightShift: ArduinoKeycode.rightShift,
+  Keycode.rightAlt: ArduinoKeycode.rightAlt,
+  Keycode.rightGui: ArduinoKeycode.rightGui,
+  Keycode.tab: ArduinoKeycode.tab,
+  Keycode.capslock: ArduinoKeycode.capslock,
+  Keycode.backspace: ArduinoKeycode.backspace,
+  Keycode.enter: ArduinoKeycode.enter,
+  Keycode.menu: ArduinoKeycode.menu,
+  Keycode.insert: ArduinoKeycode.insert,
+  Keycode.delete: ArduinoKeycode.delete,
+  Keycode.home: ArduinoKeycode.home,
+  Keycode.end: ArduinoKeycode.end,
+  Keycode.pageUp: ArduinoKeycode.pageUp,
+  Keycode.pageDown: ArduinoKeycode.pageDown,
+  Keycode.upArrow: ArduinoKeycode.upArrow,
+  Keycode.downArrow: ArduinoKeycode.downArrow,
+  Keycode.leftArrow: ArduinoKeycode.leftArrow,
+  Keycode.rightArrow: ArduinoKeycode.rightArrow,
+  Keycode.numLock: ArduinoKeycode.numLock,
+  Keycode.kpSlash: ArduinoKeycode.kpSlash,
+  Keycode.kpAsterisk: ArduinoKeycode.kpAsterisk,
+  Keycode.kpMinus: ArduinoKeycode.kpMinus,
+  Keycode.kpPlus: ArduinoKeycode.kpPlus,
+  Keycode.kpEnter: ArduinoKeycode.kpEnter,
+  Keycode.kp1: ArduinoKeycode.kp1,
+  Keycode.kp2: ArduinoKeycode.kp2,
+  Keycode.kp3: ArduinoKeycode.kp3,
+  Keycode.kp4: ArduinoKeycode.kp4,
+  Keycode.kp5: ArduinoKeycode.kp5,
+  Keycode.kp6: ArduinoKeycode.kp6,
+  Keycode.kp7: ArduinoKeycode.kp7,
+  Keycode.kp8: ArduinoKeycode.kp8,
+  Keycode.kp9: ArduinoKeycode.kp9,
+  Keycode.kp0: ArduinoKeycode.kp0,
+  Keycode.kpDot: ArduinoKeycode.kpDot,
+  Keycode.esc: ArduinoKeycode.esc,
+  Keycode.f1: ArduinoKeycode.f1,
+  Keycode.f2: ArduinoKeycode.f2,
+  Keycode.f3: ArduinoKeycode.f3,
+  Keycode.f4: ArduinoKeycode.f4,
+  Keycode.f5: ArduinoKeycode.f5,
+  Keycode.f6: ArduinoKeycode.f6,
+  Keycode.f7: ArduinoKeycode.f7,
+  Keycode.f8: ArduinoKeycode.f8,
+  Keycode.f9: ArduinoKeycode.f9,
+  Keycode.f10: ArduinoKeycode.f10,
+  Keycode.f11: ArduinoKeycode.f11,
+  Keycode.f12: ArduinoKeycode.f12,
+  Keycode.f13: ArduinoKeycode.f13,
+  Keycode.f14: ArduinoKeycode.f14,
+  Keycode.f15: ArduinoKeycode.f15,
+  Keycode.f16: ArduinoKeycode.f16,
+  Keycode.f17: ArduinoKeycode.f17,
+  Keycode.f18: ArduinoKeycode.f18,
+  Keycode.f19: ArduinoKeycode.f19,
+  Keycode.f20: ArduinoKeycode.f20,
+  Keycode.f21: ArduinoKeycode.f21,
+  Keycode.f22: ArduinoKeycode.f22,
+  Keycode.f23: ArduinoKeycode.f23,
+  Keycode.f24: ArduinoKeycode.f24,
+  Keycode.printScreen: ArduinoKeycode.printScreen,
+  Keycode.scrollLock: ArduinoKeycode.scrollLock,
+  Keycode.pause: ArduinoKeycode.pause,
+  Keycode.a: ArduinoKeycode.a,
+  Keycode.b: ArduinoKeycode.b,
+  Keycode.c: ArduinoKeycode.c,
+  Keycode.d: ArduinoKeycode.d,
+  Keycode.e: ArduinoKeycode.e,
+  Keycode.f: ArduinoKeycode.f,
+  Keycode.g: ArduinoKeycode.g,
+  Keycode.h: ArduinoKeycode.h,
+  Keycode.i: ArduinoKeycode.i,
+  Keycode.j: ArduinoKeycode.j,
+  Keycode.k: ArduinoKeycode.k,
+  Keycode.l: ArduinoKeycode.l,
+  Keycode.m: ArduinoKeycode.m,
+  Keycode.n: ArduinoKeycode.n,
+  Keycode.o: ArduinoKeycode.o,
+  Keycode.p: ArduinoKeycode.p,
+  Keycode.q: ArduinoKeycode.q,
+  Keycode.r: ArduinoKeycode.r,
+  Keycode.s: ArduinoKeycode.s,
+  Keycode.t: ArduinoKeycode.t,
+  Keycode.u: ArduinoKeycode.u,
+  Keycode.v: ArduinoKeycode.v,
+  Keycode.w: ArduinoKeycode.w,
+  Keycode.x: ArduinoKeycode.x,
+  Keycode.y: ArduinoKeycode.y,
+  Keycode.z: ArduinoKeycode.z,
   Keycode.undefined: -1,
 };
 
-Map<Keycode, int> keyToFlutter = {
-  Keycode.leftCtrl: Flutter.leftCtrl,
-  Keycode.leftShift: Flutter.leftShift,
-  Keycode.leftAlt: Flutter.leftAlt,
-  Keycode.leftGui: Flutter.leftGui,
-  Keycode.rightCtrl: Flutter.rightCtrl,
-  Keycode.rightShift: Flutter.rightShift,
-  Keycode.rightAlt: Flutter.rightAlt,
-  Keycode.rightGui: Flutter.rightGui,
-  Keycode.tab: Flutter.tab,
-  Keycode.capslock: Flutter.capslock,
-  Keycode.backspace: Flutter.backspace,
-  Keycode.enter: Flutter.enter,
-  Keycode.menu: Flutter.menu,
-  Keycode.insert: Flutter.insert,
-  Keycode.delete: Flutter.delete,
-  Keycode.home: Flutter.home,
-  Keycode.end: Flutter.end,
-  Keycode.pageUp: Flutter.pageUp,
-  Keycode.pageDown: Flutter.pageDown,
-  Keycode.upArrow: Flutter.upArrow,
-  Keycode.downArrow: Flutter.downArrow,
-  Keycode.leftArrow: Flutter.leftArrow,
-  Keycode.rightArrow: Flutter.rightArrow,
-  Keycode.numLock: Flutter.numLock,
-  Keycode.kpSlash: Flutter.kpSlash,
-  Keycode.kpAsterisk: Flutter.kpAsterisk,
-  Keycode.kpMinus: Flutter.kpMinus,
-  Keycode.kpPlus: Flutter.kpPlus,
-  Keycode.kpEnter: Flutter.kpEnter,
-  Keycode.kp1: Flutter.kp1,
-  Keycode.kp2: Flutter.kp2,
-  Keycode.kp3: Flutter.kp3,
-  Keycode.kp4: Flutter.kp4,
-  Keycode.kp5: Flutter.kp5,
-  Keycode.kp6: Flutter.kp6,
-  Keycode.kp7: Flutter.kp7,
-  Keycode.kp8: Flutter.kp8,
-  Keycode.kp9: Flutter.kp9,
-  Keycode.kp0: Flutter.kp0,
-  Keycode.kpDot: Flutter.kpDot,
-  Keycode.esc: Flutter.esc,
-  Keycode.f1: Flutter.f1,
-  Keycode.f2: Flutter.f2,
-  Keycode.f3: Flutter.f3,
-  Keycode.f4: Flutter.f4,
-  Keycode.f5: Flutter.f5,
-  Keycode.f6: Flutter.f6,
-  Keycode.f7: Flutter.f7,
-  Keycode.f8: Flutter.f8,
-  Keycode.f9: Flutter.f9,
-  Keycode.f10: Flutter.f10,
-  Keycode.f11: Flutter.f11,
-  Keycode.f12: Flutter.f12,
-  Keycode.f13: Flutter.f13,
-  Keycode.f14: Flutter.f14,
-  Keycode.f15: Flutter.f15,
-  Keycode.f16: Flutter.f16,
-  Keycode.f17: Flutter.f17,
-  Keycode.f18: Flutter.f18,
-  Keycode.f19: Flutter.f19,
-  Keycode.f20: Flutter.f20,
-  Keycode.f21: Flutter.f21,
-  Keycode.f22: Flutter.f22,
-  Keycode.f23: Flutter.f23,
-  Keycode.f24: Flutter.f24,
-  Keycode.printScreen: Flutter.printScreen,
-  Keycode.scrollLock: Flutter.scrollLock,
-  Keycode.pause: Flutter.pause,
-  Keycode.a: Flutter.a,
-  Keycode.b: Flutter.b,
-  Keycode.c: Flutter.c,
-  Keycode.d: Flutter.d,
-  Keycode.e: Flutter.e,
-  Keycode.f: Flutter.f,
-  Keycode.g: Flutter.g,
-  Keycode.h: Flutter.h,
-  Keycode.i: Flutter.i,
-  Keycode.j: Flutter.j,
-  Keycode.k: Flutter.k,
-  Keycode.l: Flutter.l,
-  Keycode.m: Flutter.m,
-  Keycode.n: Flutter.n,
-  Keycode.o: Flutter.o,
-  Keycode.p: Flutter.p,
-  Keycode.q: Flutter.q,
-  Keycode.r: Flutter.r,
-  Keycode.s: Flutter.s,
-  Keycode.t: Flutter.t,
-  Keycode.u: Flutter.u,
-  Keycode.v: Flutter.v,
-  Keycode.w: Flutter.w,
-  Keycode.x: Flutter.x,
-  Keycode.y: Flutter.y,
-  Keycode.z: Flutter.z,
+Map<Keycode, int> keyToFlutterKeycode = {
+  Keycode.leftCtrl: FlutterKeycode.leftCtrl,
+  Keycode.leftShift: FlutterKeycode.leftShift,
+  Keycode.leftAlt: FlutterKeycode.leftAlt,
+  Keycode.leftGui: FlutterKeycode.leftGui,
+  Keycode.rightCtrl: FlutterKeycode.rightCtrl,
+  Keycode.rightShift: FlutterKeycode.rightShift,
+  Keycode.rightAlt: FlutterKeycode.rightAlt,
+  Keycode.rightGui: FlutterKeycode.rightGui,
+  Keycode.tab: FlutterKeycode.tab,
+  Keycode.capslock: FlutterKeycode.capslock,
+  Keycode.backspace: FlutterKeycode.backspace,
+  Keycode.enter: FlutterKeycode.enter,
+  Keycode.menu: FlutterKeycode.menu,
+  Keycode.insert: FlutterKeycode.insert,
+  Keycode.delete: FlutterKeycode.delete,
+  Keycode.home: FlutterKeycode.home,
+  Keycode.end: FlutterKeycode.end,
+  Keycode.pageUp: FlutterKeycode.pageUp,
+  Keycode.pageDown: FlutterKeycode.pageDown,
+  Keycode.upArrow: FlutterKeycode.upArrow,
+  Keycode.downArrow: FlutterKeycode.downArrow,
+  Keycode.leftArrow: FlutterKeycode.leftArrow,
+  Keycode.rightArrow: FlutterKeycode.rightArrow,
+  Keycode.numLock: FlutterKeycode.numLock,
+  Keycode.kpSlash: FlutterKeycode.kpSlash,
+  Keycode.kpAsterisk: FlutterKeycode.kpAsterisk,
+  Keycode.kpMinus: FlutterKeycode.kpMinus,
+  Keycode.kpPlus: FlutterKeycode.kpPlus,
+  Keycode.kpEnter: FlutterKeycode.kpEnter,
+  Keycode.kp1: FlutterKeycode.kp1,
+  Keycode.kp2: FlutterKeycode.kp2,
+  Keycode.kp3: FlutterKeycode.kp3,
+  Keycode.kp4: FlutterKeycode.kp4,
+  Keycode.kp5: FlutterKeycode.kp5,
+  Keycode.kp6: FlutterKeycode.kp6,
+  Keycode.kp7: FlutterKeycode.kp7,
+  Keycode.kp8: FlutterKeycode.kp8,
+  Keycode.kp9: FlutterKeycode.kp9,
+  Keycode.kp0: FlutterKeycode.kp0,
+  Keycode.kpDot: FlutterKeycode.kpDot,
+  Keycode.esc: FlutterKeycode.esc,
+  Keycode.f1: FlutterKeycode.f1,
+  Keycode.f2: FlutterKeycode.f2,
+  Keycode.f3: FlutterKeycode.f3,
+  Keycode.f4: FlutterKeycode.f4,
+  Keycode.f5: FlutterKeycode.f5,
+  Keycode.f6: FlutterKeycode.f6,
+  Keycode.f7: FlutterKeycode.f7,
+  Keycode.f8: FlutterKeycode.f8,
+  Keycode.f9: FlutterKeycode.f9,
+  Keycode.f10: FlutterKeycode.f10,
+  Keycode.f11: FlutterKeycode.f11,
+  Keycode.f12: FlutterKeycode.f12,
+  Keycode.f13: FlutterKeycode.f13,
+  Keycode.f14: FlutterKeycode.f14,
+  Keycode.f15: FlutterKeycode.f15,
+  Keycode.f16: FlutterKeycode.f16,
+  Keycode.f17: FlutterKeycode.f17,
+  Keycode.f18: FlutterKeycode.f18,
+  Keycode.f19: FlutterKeycode.f19,
+  Keycode.f20: FlutterKeycode.f20,
+  Keycode.f21: FlutterKeycode.f21,
+  Keycode.f22: FlutterKeycode.f22,
+  Keycode.f23: FlutterKeycode.f23,
+  Keycode.f24: FlutterKeycode.f24,
+  Keycode.printScreen: FlutterKeycode.printScreen,
+  Keycode.scrollLock: FlutterKeycode.scrollLock,
+  Keycode.pause: FlutterKeycode.pause,
+  Keycode.a: FlutterKeycode.a,
+  Keycode.b: FlutterKeycode.b,
+  Keycode.c: FlutterKeycode.c,
+  Keycode.d: FlutterKeycode.d,
+  Keycode.e: FlutterKeycode.e,
+  Keycode.f: FlutterKeycode.f,
+  Keycode.g: FlutterKeycode.g,
+  Keycode.h: FlutterKeycode.h,
+  Keycode.i: FlutterKeycode.i,
+  Keycode.j: FlutterKeycode.j,
+  Keycode.k: FlutterKeycode.k,
+  Keycode.l: FlutterKeycode.l,
+  Keycode.m: FlutterKeycode.m,
+  Keycode.n: FlutterKeycode.n,
+  Keycode.o: FlutterKeycode.o,
+  Keycode.p: FlutterKeycode.p,
+  Keycode.q: FlutterKeycode.q,
+  Keycode.r: FlutterKeycode.r,
+  Keycode.s: FlutterKeycode.s,
+  Keycode.t: FlutterKeycode.t,
+  Keycode.u: FlutterKeycode.u,
+  Keycode.v: FlutterKeycode.v,
+  Keycode.w: FlutterKeycode.w,
+  Keycode.x: FlutterKeycode.x,
+  Keycode.y: FlutterKeycode.y,
+  Keycode.z: FlutterKeycode.z,
   Keycode.undefined: -1,
 };
