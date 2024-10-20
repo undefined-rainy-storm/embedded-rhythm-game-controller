@@ -46,6 +46,8 @@ class Globals {
         EachKeyConfig(keycode: Keycode.undefined, enabled: false)
         );
     // Load from Arduino
+    keyConfig = BuildConfig.defaultKeyConfig;
+    return;
     keyConfig = KeyConfig(
         loaded.esc.keycode != Keycode.undefined
             ? loaded.esc

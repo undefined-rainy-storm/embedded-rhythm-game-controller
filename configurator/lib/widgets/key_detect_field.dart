@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:configurator/models/keycode.dart';
 
 class KeyDetectField extends StatefulWidget {
-  const KeyDetectField({super.key, this.callbackFunc});
+  KeyDetectField({super.key, this.callbackFunc, this.nowKey = Keycode.undefined});
   final Null Function(Keycode)? callbackFunc;
+  Keycode nowKey;
   @override
   State<KeyDetectField> createState() => KeyDetectFieldState();
 }
 
 class KeyDetectFieldState extends State<KeyDetectField> {
-  Keycode _nowKey = Keycode.undefined;
   final TextEditingController _textEditingController = TextEditingController(text: '');
   final FocusNode _focusNode = FocusNode();
 
@@ -18,7 +18,7 @@ class KeyDetectFieldState extends State<KeyDetectField> {
   void initState() {
     super.initState();
     _focusNode.addListener(_onFocusChange);
-    _textEditingController.text = _nowKey.name;
+    _textEditingController.text = widget.nowKey.name;
   }
 
   @override
@@ -39,9 +39,9 @@ class KeyDetectFieldState extends State<KeyDetectField> {
       autofocus: false,
       onKeyEvent: (event) {
         if (event is KeyDownEvent) {
-          _nowKey = FlutterKeycode.toKeycode(event.logicalKey.hashCode);
-          _textEditingController.text = _nowKey.name;
-          widget.callbackFunc?.call(_nowKey);
+          widget.nowKey = FlutterKeycode.toKeycode(event.logicalKey.hashCode);
+          _textEditingController.text = widget.nowKey.name;
+          widget.callbackFunc?.call(widget.nowKey);
         }
       },
       child: TextField(
@@ -49,7 +49,7 @@ class KeyDetectFieldState extends State<KeyDetectField> {
         decoration: const InputDecoration(border: OutlineInputBorder()),
         textAlign: TextAlign.center,
         onChanged: (text) {
-          _textEditingController.text = _nowKey.name;
+          _textEditingController.text = widget.nowKey.name;
         }
       )
       );

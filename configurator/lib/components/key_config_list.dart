@@ -239,7 +239,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
     ];
   }
 
-  List<KeyConfigListItemContainer>? getKeyConfigMiscContainers(BuildContext context) {}
+  List<KeyConfigListItemContainer>? getKeyConfigMiscContainers(
+      BuildContext context) {}
 
   List<Widget> _buildList(List<KeyConfigListItemContainer> containers) {
     return containers.map<Widget>((KeyConfigListItemContainer container) {
@@ -250,30 +251,31 @@ class _KeyConfigListState extends State<KeyConfigList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: <Widget>[
-            SectionTitle(
-                value: AppLocalizations.of(context)!
-                    .keyConfigEssentialsSectionTitle)
-          ] +
-          _buildList(getKeyConfigEssentialContainers(context)) +
-          <Widget>[
-            SectionTitle(
-                value: AppLocalizations.of(context)!
-                    .keyConfigGameControlsSectionTitle)
-          ] +
-          _buildList(getKeyConfigGameControlContainers(context)) +
-          <Widget>[
-            SectionTitle(
-                value: AppLocalizations.of(context)!
-                    .keyConfigCommunicationsSectionTitle),
-          ] +
-          _buildList(getKeyConfigCommunicationContainers(context)) /* +
+        children: <Widget>[
+              SectionTitle(
+                  value: AppLocalizations.of(context)!
+                      .keyConfigEssentialsSectionTitle)
+            ] +
+            _buildList(getKeyConfigEssentialContainers(context)) +
+            <Widget>[
+              SectionTitle(
+                  value: AppLocalizations.of(context)!
+                      .keyConfigGameControlsSectionTitle)
+            ] +
+            _buildList(getKeyConfigGameControlContainers(context)) +
+            <Widget>[
+              SectionTitle(
+                  value: AppLocalizations.of(context)!
+                      .keyConfigCommunicationsSectionTitle),
+            ] +
+            _buildList(getKeyConfigCommunicationContainers(
+                context)) /* +
           <Widget>[
             SectionTitle(
                 value: AppLocalizations.of(context)!.keyConfigMiscSectionTitle),
           ] +
           _buildList(keyConfigMiscContainers),*/
-    );
+        );
   }
 }
 
@@ -290,31 +292,42 @@ class _KeyConfigListItemState extends State<KeyConfigListItem> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SwitchListTile(
-          title: Text(widget.container.name),
-          value: widget.container.enabled,
-          onChanged: (value) {
-            setState(() {
-              widget.container.enabled = value;
-            });
-          },
-        ),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          height: widget.container.enabled ? 100.0 : 0.0,
-          alignment: Alignment.centerLeft,
-          child: widget.container.enabled
-              ? Container(
-                  color: Colors.blue[100], // Optional background color
-                  padding: const EdgeInsets.all(16.0),
-                  child: KeyDetectField(
-                    callbackFunc: (Keycode code) {
-                      widget.container.handler?.call(code);
-                      widget.container.key = code;
-                    },
-                  ),
-                )
-              : const SizedBox.shrink(),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                widget.container.name,
+                style: TextStyle(fontSize: 12),
+              ),
+              Transform.scale(
+                  scale: .6,
+                  child: Switch(
+                      onChanged: (value) {
+                        setState(() {
+                          widget.container.enabled = value;
+                        });
+                      },
+                      value: widget.container.enabled)),
+            ]),
+        Transform.scale(
+          scale: .8,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: widget.container.enabled ? 60.0 : 0.0,
+            alignment: Alignment.centerLeft,
+            child: widget.container.enabled
+                ? Container(
+                    color: Colors.blue[100], // Optional background color
+                    child: KeyDetectField(
+                      nowKey: widget.container.key,
+                      callbackFunc: (Keycode code) {
+                        widget.container.handler?.call(code);
+                        widget.container.key = code;
+                      },
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
         ),
       ],
     );

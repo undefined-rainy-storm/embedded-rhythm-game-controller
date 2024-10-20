@@ -22,9 +22,7 @@ class SerialDevice {
     if (!LibserialportUtils.isValid(port)) return;
 
     // SerialPort
-    if (serialPort == null) {
-      serialPort = SerialPort(port);
-    }
+    serialPort ??= SerialPort(port);
     // SerialDescriptor
     serialDescriptor = SerialDescriptor(port, '${serialPort?.description}');
   }
