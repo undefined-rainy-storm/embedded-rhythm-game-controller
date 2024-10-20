@@ -19,7 +19,7 @@
 #define VERIFY_KEYBOARD true
 
 #define INPUT_CHAR_ON_VERIFY_KEYBOARD 'a'
-#define PRESSING_TICK_ON_VERIFY_KEYBOARD 500
+#define PRESSING_MILLISECONDS_ON_VERIFY_KEYBOARD 3000
 #define COMMAND_INVOKE_VERIFY_KEYBOARD 'k'
 #define COMMAND_INVOKE_VERIFY_EEPROM 'e'
 
@@ -30,7 +30,8 @@
 #include <Keyboard.h>
 #endif
 
-int pressingTick = 0;
+bool pressingInvoked = false;
+unsigned long pressingInvokedAt = -1;
 
 void setup() {
   #if VERIFY_KEYBOARD
@@ -53,8 +54,16 @@ void setup() {
 
 void loop() {
   #if VERIFY_KEYBOARD
-  if (pressingTick--) {
-    Keyboard.release(INPUT_CHAR_ON_VERIFY_KEYBOARD);
+  if (pressingInvoked) {
+    unsigned long now = millis();
+    if (millis() - pressingInvokedAt > PRESSING_MILLISECONDS_ON_VERIFY_KEYBOARD) {
+      Keyboard.release(INPUT_CHAR_ON_VERIFY_KEYBOARD);
+      Serial.print("[Keyboard] Pressing done. (Released at: ");
+      Serial.print(now);
+      Serial.println(")");
+      pressingInvoked = false;
+    } else {
+    }
   }
   #endif
   
@@ -78,17 +87,20 @@ void loop() {
 
 void invokeVerifyKeyboard() {
   #if VERIFY_KEYBOARD
+  pressingInvoked = true;
   Keyboard.write(INPUT_CHAR_ON_VERIFY_KEYBOARD);
   Serial.print("[Keyboard] `");
   Serial.print(INPUT_CHAR_ON_VERIFY_KEYBOARD);
   Serial.println("` has been wrote.");
 
-  pressingTick = PRESSING_TICK_ON_VERIFY_KEYBOARD;
+  pressingInvokedAt = millis();
   Serial.print("[Keyboard] `");
   Serial.print(INPUT_CHAR_ON_VERIFY_KEYBOARD);
   Serial.print("` will be pressed for ");
-  Serial.print(pressingTick);
-  Serial.println("ticks.");
+  Serial.print(PRESSING_MILLISECONDS_ON_VERIFY_KEYBOARD);
+  Serial.print(" milliseconds. (Started at: ");
+  Serial.print(pressingInvokedAt);
+  Serial.println(")");
   Keyboard.press(INPUT_CHAR_ON_VERIFY_KEYBOARD);
   #else
   Serial.println("[Keyboard] Keyboard verification has been disabled.");

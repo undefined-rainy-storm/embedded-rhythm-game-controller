@@ -26,7 +26,7 @@
 #define SERIAL_SPEED    9600  // 시리얼 통신 속도
 
 #define INPUT_CHAR_ON_VERIFY_KEYBOARD 'a'  // 키보드 입력 검증 시 누를 키
-#define PRESSING_TICK_ON_VERIFY_KEYBOARD 500  // 키보드 입력 검증 시 키 누르는 시간
+#define PRESSING_MILLISECONDS_ON_VERIFY_KEYBOARD 3000  // 키보드 입력 검증 시 키 누르는 시간
 #define COMMAND_INVOKE_VERIFY_KEYBOARD 'k'  // 키보드 입력 검증 명령어
 #define COMMAND_INVOKE_VERIFY_EEPROM 'e'  // 저장 검증 명령어
 ```
