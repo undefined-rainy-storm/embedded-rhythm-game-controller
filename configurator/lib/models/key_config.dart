@@ -1,41 +1,39 @@
-import 'package:configurator/models/keycode.dart';
+import 'package:configurator/models/each_key_config.dart';
 
 class KeyConfig {
-  Keycode esc;
-  Keycode enter;
-  Keycode tab; // for Difficulty(Lobby)
-  Keycode space; // for Option(Lobby), Manual Fever(Ingame)
+  EachKeyConfig esc;
+  EachKeyConfig enter;
+  EachKeyConfig tab; // for Difficulty(Lobby)
+  EachKeyConfig space; // for Option(Lobby), Manual Fever(Ingame)
 
-  Keycode speedUp; // digit1
-  Keycode speedDown; // digit2
-  Keycode rewind; // Backspace
+  EachKeyConfig speedUp; // digit1
+  EachKeyConfig speedDown; // digit2
+  EachKeyConfig rewind; // Backspace
 
-  Keycode
-      leftShift; // It may be useless (duplicated with tuneLeftSide in default)
-  Keycode
-      rightShift; // It may be useless (duplicated with tuneRightSide in default)
+  EachKeyConfig leftShift; // It may be useless (duplicated with tuneLeftSide in default)
+  EachKeyConfig rightShift; // It may be useless (duplicated with tuneRightSide in default)
 
-  Keycode arrowUp;
-  Keycode arrowDown;
-  Keycode arrowLeft;
-  Keycode arrowRight;
+  EachKeyConfig arrowUp;
+  EachKeyConfig arrowDown;
+  EachKeyConfig arrowLeft;
+  EachKeyConfig arrowRight;
 
-  Keycode tuneLeftSide;
-  Keycode tuneS;
-  Keycode tuneD;
-  Keycode tuneF;
-  Keycode tuneC;
-  Keycode tuneM;
-  Keycode tuneJ;
-  Keycode tuneK;
-  Keycode tuneL;
-  Keycode tuneRightSide;
+  EachKeyConfig tuneLeftSide;
+  EachKeyConfig tuneS;
+  EachKeyConfig tuneD;
+  EachKeyConfig tuneF;
+  EachKeyConfig tuneC;
+  EachKeyConfig tuneM;
+  EachKeyConfig tuneJ;
+  EachKeyConfig tuneK;
+  EachKeyConfig tuneL;
+  EachKeyConfig tuneRightSide;
 
-  Keycode emoticon1; // digit3
-  Keycode emoticon2; // digit4
-  Keycode emoticon3; // digit5
-  Keycode emoticon4; // digit6
-  Keycode emoticon5; // digit7
+  EachKeyConfig emoticon1; // digit3
+  EachKeyConfig emoticon2; // digit4
+  EachKeyConfig emoticon3; // digit5
+  EachKeyConfig emoticon4; // digit6
+  EachKeyConfig emoticon5; // digit7
 
   KeyConfig(
     this.esc,

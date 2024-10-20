@@ -46,7 +46,7 @@ class KeyDetectFieldState extends State<KeyDetectField> {
       },
       child: TextField(
         controller: _textEditingController,
-        decoration: InputDecoration(border: OutlineInputBorder()),
+        decoration: const InputDecoration(border: OutlineInputBorder()),
         textAlign: TextAlign.center,
         onChanged: (text) {
           _textEditingController.text = _nowKey.name;

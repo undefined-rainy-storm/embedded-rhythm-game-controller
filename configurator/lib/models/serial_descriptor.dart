@@ -5,10 +5,12 @@ class SerialDescriptor implements IListDropdownButtonItem<String> {
   late final String description;
   SerialDescriptor(this.port, this.description);
 
+  @override
   String toValue() {
-    return this.port;
+    return port;
   }
+  @override
   String toText() {
-    return '(${this.port}) ${this.description}';
+    return '(${port}) ${description}';
   }
 }

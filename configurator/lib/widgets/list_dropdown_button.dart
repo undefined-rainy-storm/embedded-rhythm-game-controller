@@ -19,8 +19,8 @@ class _ListDropdownButtonState extends State<ListDropdownButton> {
     return Container(
         child: FilledButton(
             style: FilledButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
-        minimumSize: Size(0, 0), // Remove minimum size constraints
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+        minimumSize: const Size(0, 0), // Remove minimum size constraints
         tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrink to fit
       ),
       onPressed: () async {

@@ -1,5 +1,6 @@
 import 'package:configurator/components/device_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:configurator/components/key_config_list.dart';
 
 class MainConfigPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _MainConfigPageState extends State<MainConfigPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Main Configuration')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.appTitle)),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(16.0), // Add padding as needed
@@ -24,11 +25,6 @@ class _MainConfigPageState extends State<MainConfigPage> {
                 alignment: Alignment.center,
                 child: DeviceSelector(),
               ),
-              Text(
-                'Key Configuration',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 16.0), // Add spacing between title and list
               Expanded(
                 child: KeyConfigList(), // Make the list take up remaining space
               ),

@@ -38,7 +38,7 @@ class _DeviceSelectorState extends State<DeviceSelector> {
   Widget build(BuildContext context) {
     return ListDropdownButton(
       items: _serialDescriptors,
-      placeholder: Text('(select)'),
+      placeholder: const Text('(select)'),
       onSelected: (selected) {
         Globals.instance.currentSerialDevicePort = selected.toValue();
       },
