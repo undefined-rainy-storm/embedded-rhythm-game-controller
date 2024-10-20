@@ -51,7 +51,7 @@ class _DebugSerialPageState extends State<DebugSerialPage> {
               ElevatedButton(
                   onPressed: _sayHelloWorld,
                   child:
-                      Text("Say Hello World", style: TextStyle(fontSize: 100)))
+                      const Text("Say Hello World", style: TextStyle(fontSize: 100)))
             ],
           ),
         ));

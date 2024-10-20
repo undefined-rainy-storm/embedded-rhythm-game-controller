@@ -48,7 +48,7 @@ class SerialDevice {
     try {
       // Wait for a response with a timeout
       Uint8List response =
-          await _controller.stream.first.timeout(Duration(seconds: 5));
+          await _controller.stream.first.timeout(const Duration(seconds: 5));
       print('Received response: $response');
       // Process the response to determine if the device is valid
       return _processResponse(response);

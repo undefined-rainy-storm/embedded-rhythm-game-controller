@@ -64,7 +64,7 @@ class _SerialDevicesWidgetState extends State<SerialDevicesWidget> {
       onChanged: (SerialDescriptor? device) {
         setState(() {
           dropdownValue = device!;
-          _nowDevice = SerialDevice(device!.port);
+          _nowDevice = SerialDevice(device.port);
         });
         _nowDevice.openRWComm();
         _nowDevice.requestIsValidDevice().then((value) {

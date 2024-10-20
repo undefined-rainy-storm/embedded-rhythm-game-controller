@@ -6,6 +6,6 @@ class SectionTitle extends StatelessWidget {
 
   @override
   build(BuildContext context) {
-    return Text(content ?? '', style: TextStyle(fontSize: 26));
+    return Text(content ?? '', style: const TextStyle(fontSize: 26));
   }
 }

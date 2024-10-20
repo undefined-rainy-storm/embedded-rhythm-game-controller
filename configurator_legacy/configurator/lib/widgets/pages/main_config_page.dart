@@ -44,8 +44,8 @@ class _MainConfigPageState extends State<MainConfigPage> {
         padding: const EdgeInsets.only(),
         child: Column(
           children: [
-            SerialDevicesWidget(),
-            Column(
+            const SerialDevicesWidget(),
+            const Column(
               children: [
                 SectionTitle(content: 'Controls'),
                 Row(
@@ -59,7 +59,7 @@ class _MainConfigPageState extends State<MainConfigPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SectionTitle(content: 'Tunes'),
+                const SectionTitle(content: 'Tunes'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -157,7 +157,7 @@ class _MainConfigPageState extends State<MainConfigPage> {
                 )
               ],
             ),
-            Column(
+            const Column(
               children: [SectionTitle(content: 'Communication'), Row()],
             )
           ],

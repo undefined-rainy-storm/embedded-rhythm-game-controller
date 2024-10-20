@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KeyConfigListItem extends StatefulWidget {
-  const KeyConfigListItem({Key? key, this.name}) : super(key: key);
+  const KeyConfigListItem({super.key, this.name});
   
   final String name;
 
@@ -13,7 +13,7 @@ class KeyConfigListItemState extends State<KeyConfigListItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10.0,
         horizontal: 5.0
