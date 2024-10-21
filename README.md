@@ -1,10 +1,11 @@
-# 리듬게임 컨트롤러: 소프트웨어 파트
+# Rhythm Game Controller
 
-임베디드 소프트웨어 팀 프로젝트
+Rhythm Game Controller - Team Project for Embedded Software Lecture
 
 ## 시작하기
 
-이 리포지토리는 아두이노에 컴파일해서 사용하는 컨트롤러 코드와 아두이노 외부에서 하드웨어 설정을 변경할 수 있는 설정기로 이루어집니다.
-
- - 아두이노 컨트롤러: [`/controller`](./controller/)
- - 설정기: [`/configurator`](./configurator/)
+ - [`circuit`](./circuit/) - Hardware circuit diagram
+ - [`configurator`](./configurator/) - Controller key mapping program
+ - [`controller`](./controller/) - Arduino controller
+ - [`controller_test`](./controller_test/) - Unit test for `controller`
+ - [`controller_verify`](./controller_verify/) - Verifying progress to check wire connection
