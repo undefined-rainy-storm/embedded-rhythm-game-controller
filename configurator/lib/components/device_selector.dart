@@ -30,7 +30,6 @@ class _DeviceSelectorState extends State<DeviceSelector> {
 
   void _loadAvailableDevice() {
     setState(() {
-      _serialDescriptors = [];
       _serialDescriptors = _getAvailableDevices();
     });
   }
@@ -48,6 +47,11 @@ class _DeviceSelectorState extends State<DeviceSelector> {
       style: FilledButton.styleFrom(
           backgroundColor:
               SelectedDeviceStateUtils.getColor(_selectedDeviceState)),
+      onOpenMenu: () {
+        setState(() {
+          _loadAvailableDevice();
+        });
+      },
       onSelected: (selected) async {
         Globals.instance.currentSerialDevicePort = selected.toValue();
         setState(() {

@@ -10,12 +10,13 @@ import 'package:configurator/utilities/libserialport_utils.dart';
 import 'package:configurator/utilities/uint8list_extension.dart';
 
 class SerialDevice {
+  bool openedByThis = false;
   late SerialDescriptor? serialDescriptor;
   late SerialPort? serialPort;
   late SerialPortConfig serialPortConfig;
   late SerialPortReader? serialPortReader;
   late StreamSubscription streamSubscription;
-  final StreamController streamController = StreamController<Uint8List>();
+  late StreamController<Uint8List>? streamController;
 
   void _initSerialPortConfig() {
     serialPortConfig = SerialPortConfig()
@@ -32,7 +33,6 @@ class SerialDevice {
 
     // SerialPort
     serialPort ??= SerialPort(port);
-    print(serialPort);
     // SerialDescriptor
     serialDescriptor = SerialDescriptor(port, '${serialPort?.description}');
   }
@@ -40,6 +40,7 @@ class SerialDevice {
   void _initWithNull() {
     serialPort = null;
     serialPortReader = null;
+    streamController = null;
   }
 
   void _initSerialPortAndDescriptor(String port) =>
@@ -71,35 +72,55 @@ class SerialDevice {
   }
 
   void beginCommunication() {
-    if (serialPort == null) return;
-    if (serialPort!.isOpen) {
-      // throw SerialPortIsNotClosed;
-      return;
+    if (serialPort == null) {
+      throw Exception('Serial port is null');
     }
-    if (!serialPort!.openReadWrite()) {
-      throw SerialPortCannotOpen('Failed to open port ${serialPort!.name}');
+    if (serialPort!.isOpen) {
+      if (openedByThis) {
+        print('opened by this.');
+        closeCommunication();
+      } else {
+        throw SerialPortIsAlreadyUsed(
+            'Serial port is already open by another process');
+      }
+    } else {
+      if (!serialPort!.openReadWrite()) {
+        throw SerialPortCannotOpen('Failed to open port ${serialPort!.name}');
+      }
+      openedByThis = true;
     }
 
-    serialPortReader ??= SerialPortReader(serialPort!);
+    // Initialize the reader and controller
+    serialPortReader = SerialPortReader(serialPort!);
+    streamController = StreamController<Uint8List>();
+
+    if (streamController == null) {
+      throw StreamControllerNotInstantiatedWell(
+          'Failed to instantiate StreamController');
+    }
+
     streamSubscription = serialPortReader!.stream.listen((data) {
-      streamController.add(data);
+      streamController?.add(data);
     }, onDone: () {
-      streamController.close();
+      streamController?.close();
     });
   }
 
   void closeCommunication() {
     if (serialPort == null) return;
+
     if (serialPort!.isOpen) {
-      // throw SerialPortIsNotOpened;
-      return;
-    }
-    if (!serialPort!.close()) {
-      throw SerialPortCannotOpen('Failed to close port ${serialPort!.name}');
+      if (!serialPort!.close()) {
+        throw SerialPortCannotOpen('Failed to close port ${serialPort!.name}');
+      }
     }
 
-    serialPortReader?.close();
     streamSubscription.cancel();
+    serialPortReader?.close();
+    serialPortReader = null;
+    streamController?.close();
+    streamController = null;
+    openedByThis = false;
   }
 
   Future<bool> checkDeviceIsValid() async => await requestHandshake();
@@ -110,11 +131,13 @@ class SerialDevice {
       beginCommunication();
     } on SerialPortCannotOpen catch (e) {
       return false;
+    } on SerialPortIsAlreadyUsed catch (e) {
+      return false;
     }
 
     serialPort!.write(magic.handshakeRequest);
     try {
-      Uint8List response = await streamController.stream.first
+      Uint8List response = await streamController!.stream.first
           .timeout(const Duration(seconds: 5));
       print('Received response: $response');
       closeCommunication();
@@ -131,11 +154,13 @@ class SerialDevice {
       beginCommunication();
     } on SerialPortCannotOpen {
       return false;
+    } on StreamControllerNotInstantiatedWell {
+      return false;
     }
 
     serialPort!.write(magic.loadKeyConfigurationRequest);
     try {
-      Uint8List response = await streamController.stream.first
+      Uint8List response = await streamController!.stream.first
           .timeout(const Duration(seconds: 5));
       print('Received response: $response');
       closeCommunication();

@@ -1,5 +1,4 @@
 #include "config.h"
-#include "handlers.h"
 #include "utils.h"
 #include "magic.h"
 #include "global.h"
@@ -57,7 +56,7 @@ void loop() {
     // Reset the buffer for the next message
     if (Global::getInstance()->serialCommState & need_clear == need_clear) {
       bytesReceived = 0;
-      Global::getInstance()->serialCommState &= ~4;
+      Global::getInstance()->serialCommState &= ~need_clear;
     }
   }
 }

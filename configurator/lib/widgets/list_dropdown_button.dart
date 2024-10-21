@@ -7,10 +7,12 @@ class ListDropdownButton extends StatefulWidget {
       required this.items,
       this.placeholder,
       this.style,
+      this.onOpenMenu,
       this.onSelected});
   List<IListDropdownButtonItem> items;
   Widget? placeholder;
   ButtonStyle? style;
+  final Function()? onOpenMenu;
   final Function(IListDropdownButtonItem selected)? onSelected;
 
   @override
@@ -21,8 +23,8 @@ class _ListDropdownButtonState extends State<ListDropdownButton> {
   String? _selected;
   ButtonStyle _thisStyle = FilledButton.styleFrom(
     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
-    minimumSize: const Size(0, 0), // Remove minimum size constraints
-    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrink to fit
+    minimumSize: const Size(0, 0),
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
   @override
@@ -32,6 +34,8 @@ class _ListDropdownButtonState extends State<ListDropdownButton> {
       style:
           (widget.style == null ? _thisStyle : widget.style!.merge(_thisStyle)),
       onPressed: () async {
+        widget.onOpenMenu?.call();
+
         final RenderBox button = context.findRenderObject() as RenderBox;
         final RenderBox overlay =
             Overlay.of(context).context.findRenderObject() as RenderBox;
