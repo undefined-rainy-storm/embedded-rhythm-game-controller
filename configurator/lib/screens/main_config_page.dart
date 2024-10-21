@@ -1,4 +1,6 @@
 import 'package:configurator/components/device_selector.dart';
+import 'package:configurator/globals.dart';
+import 'package:configurator/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:configurator/components/key_config_list.dart';
@@ -11,6 +13,25 @@ class MainConfigPage extends StatefulWidget {
 }
 
 class _MainConfigPageState extends State<MainConfigPage> {
+  void _resetSaveAndRevertButton() {
+    _saveButtonOnPressed = null;
+    _revertButtonOnPressed = null;
+  }
+  void Function()? _saveButtonOnPressed;
+  void _saveButtonOnPressedHandler() {
+    setState(() {
+      _resetSaveAndRevertButton();
+      Globals.instance.saveCurrentSerialDeviceConfig();
+    });
+  }
+  void Function()? _revertButtonOnPressed;
+  void _revertButtonOnPressedHandler() {
+    setState(() {
+      _resetSaveAndRevertButton();
+      Globals.instance.revertCurrentSerialDeviceConfig();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,14 +43,33 @@ class _MainConfigPageState extends State<MainConfigPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: Text('Device Port', style: TextStyle(fontSize: 20))),
+              Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: DeviceSelector(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    DeviceSelector(),
+                    Row(
+                      children: [
+                        // Todo: Give gap
+                        FilledButton(onPressed: _saveButtonOnPressed, child: Text('Save')),
+                        FilledButton(onPressed: _revertButtonOnPressed, child: Text('Revert')),
+                      ],
+                    )
+                  ],
                 ),
               ),
               Expanded(
-                child: KeyConfigList(), // Make the list take up remaining space
+                child: KeyConfigList(
+                  onKeyConfigUpdated: () {
+                    setState(() {
+                      _saveButtonOnPressed = _saveButtonOnPressedHandler;
+                      _revertButtonOnPressed = _revertButtonOnPressedHandler;
+                    });
+                  },
+                ),
               ),
             ],
           ),

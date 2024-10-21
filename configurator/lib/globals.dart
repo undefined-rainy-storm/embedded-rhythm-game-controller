@@ -176,4 +176,13 @@ class Globals {
     keyConfig = await _getCurrentSerialDeviceConfig();
     updatedKeyConfig = KeyConfig.clone(keyConfig);
   }
+
+  void saveCurrentSerialDeviceConfig() async {
+    // await request..
+    keyConfig = KeyConfig.clone(updatedKeyConfig);
+  }
+  void revertCurrentSerialDeviceConfig() async {
+    // await request..
+    updatedKeyConfig = KeyConfig.clone(keyConfig);
+  }
 }
