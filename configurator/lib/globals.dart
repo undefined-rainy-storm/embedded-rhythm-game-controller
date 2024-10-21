@@ -8,6 +8,7 @@ class Globals {
   String currentLocale = 'kr';
 
   late KeyConfig keyConfig;
+  late KeyConfig updatedKeyConfig;
   late String currentSerialDevicePort;
   late Map<String, SerialDevice> _serialDevices;
 
@@ -49,6 +50,7 @@ class Globals {
         EachKeyConfig(keycode: Keycode.undefined, enabled: false));
     // Load from Arduino
     keyConfig = BuildConfig.defaultKeyConfig;
+    updatedKeyConfig = KeyConfig.clone(keyConfig);
     _serialDevices = Map<String, SerialDevice>();
     return;
     keyConfig = KeyConfig(

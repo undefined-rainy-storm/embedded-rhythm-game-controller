@@ -61,12 +61,15 @@ class _DeviceSelectorState extends State<DeviceSelector> {
         setState(() {
           _selectedDeviceState =
               result ? SelectedDeviceState.valid : SelectedDeviceState.invalid;
-          if (!result) {
+        });
+        if (!result) {
+          setState(() {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(EventNotifier.eventNotifyingMessage(
                     context, NotifyingEvents.serialDeviceDoesNotResponse))));
-          }
-        });
+          });
+          return;
+        }
       },
     );
   }
