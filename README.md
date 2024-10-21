@@ -2,7 +2,7 @@
 
 Rhythm Game Controller - Team Project for Embedded Software Lecture
 
-## 시작하기
+## Getting Started
 
  - [`circuit`](./circuit/) - Hardware circuit diagram
  - [`configurator`](./configurator/) - Controller key mapping program
