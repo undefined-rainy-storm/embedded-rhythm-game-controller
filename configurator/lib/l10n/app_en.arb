@@ -3,7 +3,7 @@
   "@appTitle": {
     "description": ""
   },
-  "keyConfigEssentialsSectionTitle": "Essentials",
+  "keyConfigEssentialsSectionTitle": "Tune Keys",
   "keyConfigGameControlsSectionTitle": "Game Controls",
   "keyConfigCommunicationsSectionTitle": "Communications",
   "keyConfigMiscSectionTitle": "Miscellaneous",
@@ -34,5 +34,6 @@
   "keyNameEmoticon2": "Emoticon #2",
   "keyNameEmoticon3": "Emoticon #3",
   "keyNameEmoticon4": "Emoticon #4",
-  "keyNameEmoticon5": "Emoticon #5"
+  "keyNameEmoticon5": "Emoticon #5",
+  "notifyingEventsSerialDeviceDoesNotResponse": "Selected device doesn't response. It seems to be not correct device or software installed."
 }

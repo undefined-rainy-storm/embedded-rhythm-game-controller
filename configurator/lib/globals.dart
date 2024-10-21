@@ -2,11 +2,14 @@ import 'package:configurator/build_config.dart';
 import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/key_config.dart';
+import 'package:configurator/models/serial_device.dart';
 
 class Globals {
+  String currentLocale = 'kr';
+
   late KeyConfig keyConfig;
   late String currentSerialDevicePort;
-  String currentLocale = 'kr';
+  late Map<String, SerialDevice> _serialDevices;
 
   static Globals instance = Globals._privateConstructor();
 
@@ -43,10 +46,10 @@ class Globals {
         EachKeyConfig(keycode: Keycode.undefined, enabled: false),
         EachKeyConfig(keycode: Keycode.undefined, enabled: false),
         EachKeyConfig(keycode: Keycode.undefined, enabled: false),
-        EachKeyConfig(keycode: Keycode.undefined, enabled: false)
-        );
+        EachKeyConfig(keycode: Keycode.undefined, enabled: false));
     // Load from Arduino
     keyConfig = BuildConfig.defaultKeyConfig;
+    _serialDevices = Map<String, SerialDevice>();
     return;
     keyConfig = KeyConfig(
         loaded.esc.keycode != Keycode.undefined
@@ -133,5 +136,19 @@ class Globals {
         loaded.emoticon5.keycode != Keycode.undefined
             ? loaded.emoticon5
             : BuildConfig.defaultKeyConfig.emoticon5);
+  }
+
+  SerialDevice get currentSerialDevice {
+    if (_serialDevices.containsKey(currentSerialDevicePort)) {
+      return _serialDevices[currentSerialDevicePort]!;
+    }
+    _serialDevices[currentSerialDevicePort] =
+        SerialDevice(currentSerialDevicePort);
+    return _serialDevices[currentSerialDevicePort]!;
+  }
+
+  Future<bool> checkCurrentSerialDeviceIsValid() async {
+    SerialDevice current = currentSerialDevice;
+    return await current.checkDeviceIsValid();
   }
 }

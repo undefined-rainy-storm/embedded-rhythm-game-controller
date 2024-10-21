@@ -21,9 +21,12 @@ class _MainConfigPageState extends State<MainConfigPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(
-                alignment: Alignment.center,
-                child: DeviceSelector(),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: DeviceSelector(),
+                ),
               ),
               Expanded(
                 child: KeyConfigList(), // Make the list take up remaining space

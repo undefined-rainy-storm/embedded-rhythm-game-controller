@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:configurator/models/list_dropdown_button_item.dart';
 
 class ListDropdownButton extends StatefulWidget {
-  ListDropdownButton({super.key, required this.items, this.placeholder, this.onSelected});
+  ListDropdownButton(
+      {super.key,
+      required this.items,
+      this.placeholder,
+      this.style,
+      this.onSelected});
   List<IListDropdownButtonItem> items;
   Widget? placeholder;
+  ButtonStyle? style;
   final Function(IListDropdownButtonItem selected)? onSelected;
 
   @override
@@ -13,16 +19,18 @@ class ListDropdownButton extends StatefulWidget {
 
 class _ListDropdownButtonState extends State<ListDropdownButton> {
   String? _selected;
+  ButtonStyle _thisStyle = FilledButton.styleFrom(
+    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+    minimumSize: const Size(0, 0), // Remove minimum size constraints
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrink to fit
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: FilledButton(
-            style: FilledButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
-        minimumSize: const Size(0, 0), // Remove minimum size constraints
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrink to fit
-      ),
+      style:
+          (widget.style == null ? _thisStyle : widget.style!.merge(_thisStyle)),
       onPressed: () async {
         final RenderBox button = context.findRenderObject() as RenderBox;
         final RenderBox overlay =
@@ -46,9 +54,7 @@ class _ListDropdownButtonState extends State<ListDropdownButton> {
           context: context,
           position: position,
           items: widget.items.map<PopupMenuEntry>((each) {
-            return PopupMenuItem(
-                value: each,
-                child: Text(each.toText()));
+            return PopupMenuItem(value: each, child: Text(each.toText()));
           }).toList(),
         );
 
