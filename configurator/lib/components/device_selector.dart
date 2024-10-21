@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/notifying_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
@@ -66,9 +69,31 @@ class _DeviceSelectorState extends State<DeviceSelector> {
           setState(() {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(EventNotifier.eventNotifyingMessage(
-                    context, NotifyingEvents.serialDeviceDoesNotResponse))));
+                    context,
+                    NotifyingEvents
+                        .serialDeviceDoesNotResponseMayInvalidDevice))));
           });
           return;
+        }
+
+        bool errorThrownDuringLoad = false;
+        try {
+          Globals.instance.loadCurrentSerialDeviceConfig();
+        } on SerialPortNotInstantiatedWell {
+          errorThrownDuringLoad = true;
+        } on SerialPortCannotOpen {
+          errorThrownDuringLoad = true;
+        } on StreamControllerNotInstantiatedWell {
+          errorThrownDuringLoad = true;
+        } on TimeoutException {
+          errorThrownDuringLoad = true;
+        }
+        if (errorThrownDuringLoad) {
+          setState(() {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(EventNotifier.eventNotifyingMessage(
+                    context, NotifyingEvents.serialDeviceDoesNotResponse))));
+          });
         }
       },
     );

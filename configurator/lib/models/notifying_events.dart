@@ -1,1 +1,4 @@
-enum NotifyingEvents { serialDeviceDoesNotResponse }
+enum NotifyingEvents {
+  serialDeviceDoesNotResponse,
+  serialDeviceDoesNotResponseMayInvalidDevice
+}

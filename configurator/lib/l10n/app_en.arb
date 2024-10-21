@@ -35,5 +35,6 @@
   "keyNameEmoticon3": "Emoticon #3",
   "keyNameEmoticon4": "Emoticon #4",
   "keyNameEmoticon5": "Emoticon #5",
-  "notifyingEventsSerialDeviceDoesNotResponse": "Selected device doesn't response. It seems to be not correct device or software installed."
+  "notifyingEventsSerialDeviceDoesNotResponse": "Selected device doesn't response.",
+  "notifyingEventsSerialDeviceDoesNotResponse_mayInvalidDevice": "Selected device doesn't response. It seems to be not correct device or software installed."
 }

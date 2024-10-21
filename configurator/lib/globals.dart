@@ -1,5 +1,6 @@
 import 'package:configurator/build_config.dart';
 import 'package:configurator/models/each_key_config.dart';
+import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/key_config.dart';
 import 'package:configurator/models/serial_device.dart';
@@ -11,6 +12,10 @@ class Globals {
   late KeyConfig updatedKeyConfig;
   late String currentSerialDevicePort;
   late Map<String, SerialDevice> _serialDevices;
+
+  bool get keyConfigUpdated {
+    return !(keyConfig == updatedKeyConfig);
+  }
 
   static Globals instance = Globals._privateConstructor();
 
@@ -152,5 +157,23 @@ class Globals {
   Future<bool> checkCurrentSerialDeviceIsValid() async {
     SerialDevice current = currentSerialDevice;
     return await current.checkDeviceIsValid();
+  }
+
+  Future<KeyConfig> _getCurrentSerialDeviceConfig() async {
+    SerialDevice current = currentSerialDevice;
+    return await current.requestLoadKeyConfiguration();
+  }
+
+  void loadCurrentSerialDeviceConfig() async {
+    /// Load device's keyconfig data
+    ///
+    /// Below errors must be handled:
+    /// - SerialPortNotInstantiatedWell
+    /// - SerialPortCannotOpen
+    /// - StreamControllerNotInstantiatedWell
+    /// - TimeoutException
+    /// - SerialPortCommunicationDoneIncompleted
+    keyConfig = await _getCurrentSerialDeviceConfig();
+    updatedKeyConfig = KeyConfig.clone(keyConfig);
   }
 }

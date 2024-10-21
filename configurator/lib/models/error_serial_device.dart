@@ -1,3 +1,8 @@
+class SerialPortNotInstantiatedWell implements Exception {
+  String cause;
+  SerialPortNotInstantiatedWell(this.cause);
+}
+
 class SerialPortIsNotOpened implements Exception {
   String cause;
   SerialPortIsNotOpened(this.cause);
@@ -26,4 +31,9 @@ class SerialPortIsAlreadyUsed implements Exception {
 class StreamControllerNotInstantiatedWell implements Exception {
   String cause;
   StreamControllerNotInstantiatedWell(this.cause);
+}
+
+class SerialPortCommunicationDoneIncompleted implements Exception {
+  String cause;
+  SerialPortCommunicationDoneIncompleted(this.cause);
 }

@@ -9,6 +9,9 @@ class EventNotifier {
       case NotifyingEvents.serialDeviceDoesNotResponse:
         return AppLocalizations.of(context)!
             .notifyingEventsSerialDeviceDoesNotResponse;
+      case NotifyingEvents.serialDeviceDoesNotResponseMayInvalidDevice:
+        return AppLocalizations.of(context)!
+            .notifyingEventsSerialDeviceDoesNotResponse_mayInvalidDevice;
     }
   }
 }

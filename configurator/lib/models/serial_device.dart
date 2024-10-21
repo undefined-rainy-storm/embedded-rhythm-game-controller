@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_serial_device.dart';
+import 'package:configurator/models/key_config.dart';
+import 'package:configurator/models/keycode.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:configurator/build_config.dart';
 import 'package:configurator/models/serial_descriptor.dart';
@@ -124,7 +127,6 @@ class SerialDevice {
   }
 
   Future<bool> checkDeviceIsValid() async => await requestHandshake();
-
   Future<bool> requestHandshake() async {
     if (serialPort == null) return false;
     try {
@@ -148,15 +150,11 @@ class SerialDevice {
     }
   }
 
-  Future<bool> requestLoadKeyConfiguration() async {
-    if (serialPort == null) return false;
-    try {
-      beginCommunication();
-    } on SerialPortCannotOpen {
-      return false;
-    } on StreamControllerNotInstantiatedWell {
-      return false;
+  Future<KeyConfig> requestLoadKeyConfiguration() async {
+    if (serialPort == null) {
+      throw SerialPortNotInstantiatedWell('SerialPort is `null`');
     }
+    beginCommunication();
 
     serialPort!.write(magic.loadKeyConfigurationRequest);
     try {
@@ -164,10 +162,21 @@ class SerialDevice {
           .timeout(const Duration(seconds: 5));
       print('Received response: $response');
       closeCommunication();
-      return response.equals(magic.loadKeyConfigurationResponse);
-    } on TimeoutException catch (e) {
+      if (response.length != keyConfigArrayLength) {
+        throw SerialPortCommunicationDoneIncompleted(
+            "Serial commuication has been done incompletely.");
+      }
+      List<EachKeyConfig> keyConfigs = response.map<EachKeyConfig>((each) {
+        return EachKeyConfig(
+          keycode: ArduinoKeycode.toKey(each % (1 << 8)),
+          enabled: (each / (1 << 8) == 0),
+        );
+      }).toList();
+
+      return Function.apply(KeyConfig.new, keyConfigs) as KeyConfig;
+    } on TimeoutException {
       closeCommunication();
-      return false;
+      rethrow;
     }
   }
 }
