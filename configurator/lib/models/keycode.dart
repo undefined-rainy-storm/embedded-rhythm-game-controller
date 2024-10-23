@@ -774,7 +774,7 @@ class FlutterKeycode {
   }
 }
 
-Map<Keycode, int> keyToArduinoKeycode = {
+final Map<Keycode, int> keyToArduinoKeycode = {
   Keycode.leftCtrl: ArduinoKeycode.leftCtrl,
   Keycode.leftShift: ArduinoKeycode.leftShift,
   Keycode.leftAlt: ArduinoKeycode.leftAlt,
@@ -872,7 +872,7 @@ Map<Keycode, int> keyToArduinoKeycode = {
   Keycode.undefined: -1,
 };
 
-Map<Keycode, int> keyToFlutterKeycode = {
+final Map<Keycode, int> keyToFlutterKeycode = {
   Keycode.leftCtrl: FlutterKeycode.leftCtrl,
   Keycode.leftShift: FlutterKeycode.leftShift,
   Keycode.leftAlt: FlutterKeycode.leftAlt,

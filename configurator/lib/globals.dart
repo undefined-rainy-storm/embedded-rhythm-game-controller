@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:configurator/build_config.dart';
 import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/key_config.dart';
 import 'package:configurator/models/serial_device.dart';
+import 'package:configurator/models/serial_communication_result.dart';
+import 'package:configurator/utilities/selected_device_state.dart';
 
 class Globals {
   String currentLocale = 'kr';
@@ -11,7 +15,9 @@ class Globals {
   late KeyConfig keyConfig;
   late KeyConfig updatedKeyConfig;
   late String currentSerialDevicePort;
+  late SerialDeviceState currentSerialDeviceState;
   late Map<String, SerialDevice> _serialDevices;
+  late List<Function()> onKeyConfigChangeEventHandlers;
 
   bool get keyConfigUpdated {
     return !(keyConfig == updatedKeyConfig);
@@ -56,7 +62,9 @@ class Globals {
     // Load from Arduino
     keyConfig = BuildConfig.defaultKeyConfig;
     updatedKeyConfig = KeyConfig.clone(keyConfig);
+    currentSerialDeviceState = SerialDeviceState.idle;
     _serialDevices = Map<String, SerialDevice>();
+    onKeyConfigChangeEventHandlers = [];
     return;
     keyConfig = KeyConfig(
         loaded.esc.keycode != Keycode.undefined
@@ -145,6 +153,16 @@ class Globals {
             : BuildConfig.defaultKeyConfig.emoticon5);
   }
 
+  void addOnKeyConfigChangeEventHandler(Function() handler) {
+    onKeyConfigChangeEventHandlers.add(handler);
+  }
+
+  void callOnKeyConfigChangeEventHandlers() {
+    onKeyConfigChangeEventHandlers.map((each) {
+      each();
+    });
+  }
+
   SerialDevice get currentSerialDevice {
     if (_serialDevices.containsKey(currentSerialDevicePort)) {
       return _serialDevices[currentSerialDevicePort]!;
@@ -154,17 +172,44 @@ class Globals {
     return _serialDevices[currentSerialDevicePort]!;
   }
 
-  Future<bool> checkCurrentSerialDeviceIsValid() async {
+  Future<SerialDeviceState> requestHandshakeCurrentDevice() async {
     SerialDevice current = currentSerialDevice;
-    return await current.checkDeviceIsValid();
+    SerialHandshakeResult serialHandshakeResult = await current
+        .requestHandshake(requestedSerialDevicePort: currentSerialDevicePort);
+
+    applyCurrentSerialDeviceIsValid(
+        serialHandshakeResult.port, serialHandshakeResult.data);
+    return currentSerialDeviceState;
   }
 
-  Future<KeyConfig> _getCurrentSerialDeviceConfig() async {
-    SerialDevice current = currentSerialDevice;
-    return await current.requestLoadKeyConfiguration();
+  void applyCurrentSerialDeviceIsValid(
+      String requestedSerialDevicePort, SerialDeviceState state) {
+    if (currentSerialDevicePort != requestedSerialDevicePort) {
+      currentSerialDeviceState = SerialDeviceState.expired;
+      return;
+    }
+    currentSerialDeviceState = state;
   }
 
-  void loadCurrentSerialDeviceConfig() async {
+  Future<KeyConfig?> requestLoadSavedKeyConfiguration() async {
+    SerialDevice current = currentSerialDevice;
+    SerialLoadSavedKeyConfigurationResult
+        serialLoadSavedKeyConfigurationResult =
+        await current.requestLoadSavedKeyConfiguration(
+            requestedSerialDevicePort: currentSerialDevicePort);
+
+    if (currentSerialDevicePort != serialLoadSavedKeyConfigurationResult.port) {
+      return null;
+    }
+    if (serialLoadSavedKeyConfigurationResult.data == null) {
+      return null;
+    }
+    keyConfig = serialLoadSavedKeyConfigurationResult.data!;
+    return keyConfig;
+  }
+
+/*
+  void requestGetCurrentSerialDeviceConfig() {
     /// Load device's keyconfig data
     ///
     /// Below errors must be handled:
@@ -173,16 +218,31 @@ class Globals {
     /// - StreamControllerNotInstantiatedWell
     /// - TimeoutException
     /// - SerialPortCommunicationDoneIncompleted
-    keyConfig = await _getCurrentSerialDeviceConfig();
-    updatedKeyConfig = KeyConfig.clone(keyConfig);
-  }
+    SerialDevice current = currentSerialDevice;
+    unawaited(current.requestLoadKeyConfiguration().catchError((e) {
+      switch (e.runtimeType) {
+        case SerialPortNotInstantiatedWell:
+        case SerialPortCannotOpen:
+        case StreamControllerNotInstantiatedWell:
+        case TimeoutException:
+      }
+    }));
+  }*/
 
   void saveCurrentSerialDeviceConfig() async {
     // await request..
     keyConfig = KeyConfig.clone(updatedKeyConfig);
   }
+
   void revertCurrentSerialDeviceConfig() async {
     // await request..
     updatedKeyConfig = KeyConfig.clone(keyConfig);
+    callOnKeyConfigChangeEventHandlers();
+  }
+
+  void applyCurrentSerialDeviceKeyConfigToThis(KeyConfig keyConfig) {
+    this.keyConfig = KeyConfig.clone(keyConfig);
+    updatedKeyConfig = KeyConfig.clone(keyConfig);
+    callOnKeyConfigChangeEventHandlers();
   }
 }

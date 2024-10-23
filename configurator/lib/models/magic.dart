@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+const int magicLength = 9;
+
 // handshake try host
 // 2e 68 73 2e 74 72 79 2e 68
 Uint8List handshakeRequest = Uint8List.fromList('.hs.try.h'.codeUnits);

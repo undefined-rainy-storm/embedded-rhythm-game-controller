@@ -1,23 +1,11 @@
+import 'package:configurator/components/key_config_list_item.dart';
+import 'package:configurator/models/key_config_list_item_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/globals.dart';
 import 'package:configurator/widgets/section_title.dart';
 import 'package:configurator/widgets/key_detect_field.dart';
-
-class KeyConfigListItemContainer {
-  KeyConfigListItemContainer(
-      {required this.name,
-      this.enabled = false,
-      this.key = Keycode.undefined,
-      this.onActivateChange,
-      this.onKeyChange,});
-  String name;
-  bool enabled;
-  Keycode key;
-  final Null Function(bool)? onActivateChange;
-  final Null Function(Keycode)? onKeyChange;
-}
 
 class KeyConfigList extends StatefulWidget {
   const KeyConfigList({super.key, this.onKeyConfigUpdated});
@@ -31,9 +19,11 @@ class _KeyConfigListState extends State<KeyConfigList> {
   void _onChangeHandlerCommons() {
     widget.onKeyConfigUpdated?.call();
   }
+
   void _onActivateChangeHandler(bool enabled) {
     _onChangeHandlerCommons();
   }
+
   void _onKeyChangeHandler(Keycode keycode) {
     /**
      * Todo:
@@ -434,61 +424,5 @@ class _KeyConfigListState extends State<KeyConfigList> {
           ] +
           _buildList(keyConfigMiscContainers),*/
         );
-  }
-}
-
-class KeyConfigListItem extends StatefulWidget {
-  final KeyConfigListItemContainer container;
-  const KeyConfigListItem({super.key, required this.container});
-
-  @override
-  State<KeyConfigListItem> createState() => _KeyConfigListItemState();
-}
-
-class _KeyConfigListItemState extends State<KeyConfigListItem> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                widget.container.name,
-                style: TextStyle(fontSize: 12),
-              ),
-              Transform.scale(
-                  scale: .6,
-                  child: Switch(
-                      onChanged: (value) {
-                        setState(() {
-                          widget.container.onActivateChange?.call(value);
-                          widget.container.enabled = value;
-                        });
-                      },
-                      value: widget.container.enabled)),
-            ]),
-        Transform.scale(
-          scale: .8,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: widget.container.enabled ? 60.0 : 0.0,
-            alignment: Alignment.centerLeft,
-            child: widget.container.enabled
-                ? Container(
-                    color: Colors.blue[100], // Optional background color
-                    child: KeyDetectField(
-                      nowKey: widget.container.key,
-                      callbackFunc: (Keycode code) {
-                        widget.container.onKeyChange?.call(code);
-                        widget.container.key = code;
-                      },
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
-        ),
-      ],
-    );
   }
 }

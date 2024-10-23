@@ -3,6 +3,8 @@ class SerialPortNotInstantiatedWell implements Exception {
   SerialPortNotInstantiatedWell(this.cause);
 }
 
+String typicalSerialPortNotInstantiatedWellMessage = 'SerialPort is `null`';
+
 class SerialPortIsNotOpened implements Exception {
   String cause;
   SerialPortIsNotOpened(this.cause);
@@ -37,3 +39,6 @@ class SerialPortCommunicationDoneIncompleted implements Exception {
   String cause;
   SerialPortCommunicationDoneIncompleted(this.cause);
 }
+
+String typicalSerialPortCommunicationDoneIncompletedMessage =
+    'Serial commuication has been done incompletely.';

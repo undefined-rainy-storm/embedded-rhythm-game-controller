@@ -5,6 +5,9 @@ import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/key_config.dart';
 import 'package:configurator/models/keycode.dart';
+import 'package:configurator/models/serial_communication_result.dart';
+import 'package:configurator/utilities/selected_device_state.dart';
+import 'package:configurator/utilities/serial_device_utils.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:configurator/build_config.dart';
 import 'package:configurator/models/serial_descriptor.dart';
@@ -92,8 +95,6 @@ class SerialDevice {
       }
       openedByThis = true;
     }
-
-    // Initialize the reader and controller
     serialPortReader = SerialPortReader(serialPort!);
     streamController = StreamController<Uint8List>();
 
@@ -126,31 +127,180 @@ class SerialDevice {
     openedByThis = false;
   }
 
-  Future<bool> checkDeviceIsValid() async => await requestHandshake();
-  Future<bool> requestHandshake() async {
-    if (serialPort == null) return false;
-    try {
-      beginCommunication();
-    } on SerialPortCannotOpen catch (e) {
-      return false;
-    } on SerialPortIsAlreadyUsed catch (e) {
-      return false;
+  Future<SerialHandshakeResult> requestHandshake({
+    String requestedSerialDevicePort = '',
+    int retryLimit = BuildConfig.serialHandshakeRetryLimit,
+  }) async {
+    if (serialPort == null) {
+      throw SerialPortNotInstantiatedWell(
+          typicalSerialPortNotInstantiatedWellMessage);
     }
+    beginCommunication();
 
     serialPort!.write(magic.handshakeRequest);
+
+    try {
+      Uint8List value = await streamController!.stream.first.timeout(
+        const Duration(seconds: BuildConfig.serialHandshakeTimeout),
+      );
+      closeCommunication();
+      return await onHandshakeResponse(
+        value,
+        retryLimit,
+        requestedSerialDevicePort: requestedSerialDevicePort,
+      );
+    } catch (error) {
+      closeCommunication();
+      if (error is TimeoutException) {
+        if (retryLimit > 0) {
+          return await requestHandshake(
+            requestedSerialDevicePort: requestedSerialDevicePort,
+            retryLimit: retryLimit - 1,
+          );
+        } else {
+          return SerialHandshakeResult(
+              requestedSerialDevicePort, SerialDeviceState.invalid);
+          // throw SerialPortCommunicationDoneIncompleted(typicalSerialPortCommunicationDoneIncompletedMessage);
+        }
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<SerialHandshakeResult> onHandshakeResponse(
+      Uint8List response, int retryLimit,
+      {String requestedSerialDevicePort = ''}) async {
+    if (!response.equals(magic.handshakeResponse)) {
+      if (retryLimit > 0) {
+        return await requestHandshake(
+          requestedSerialDevicePort: requestedSerialDevicePort,
+          retryLimit: retryLimit - 1,
+        );
+      } else {
+        return SerialHandshakeResult(
+            requestedSerialDevicePort, SerialDeviceState.invalid);
+      }
+    }
+
+    return SerialHandshakeResult(
+        requestedSerialDevicePort, SerialDeviceState.valid);
+  }
+
+  Future<SerialLoadSavedKeyConfigurationResult>
+      requestLoadSavedKeyConfiguration({
+    String requestedSerialDevicePort = '',
+    int retryLimit = BuildConfig.serialDefaultRetryLimit,
+  }) async {
+    if (serialPort == null) {
+      throw SerialPortNotInstantiatedWell(
+          typicalSerialPortCommunicationDoneIncompletedMessage);
+    }
+    beginCommunication();
+
+    serialPort!.write(magic.loadKeyConfigurationRequest);
+
+    try {
+      Uint8List value = await streamController!.stream.first.timeout(
+        const Duration(seconds: BuildConfig.serialDefaultTimeout),
+      );
+      closeCommunication();
+      return await onLoadSavedKeyConfigurationResponse(
+        value,
+        retryLimit,
+        requestedSerialDevicePort: requestedSerialDevicePort,
+      );
+    } catch (error) {
+      closeCommunication();
+      if (error is TimeoutException) {
+        if (retryLimit > 0) {
+          return await requestLoadSavedKeyConfiguration(
+            requestedSerialDevicePort: requestedSerialDevicePort,
+            retryLimit: retryLimit - 1,
+          );
+        } else {
+          return SerialLoadSavedKeyConfigurationResult(
+              requestedSerialDevicePort, null);
+        }
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<SerialLoadSavedKeyConfigurationResult>
+      onLoadSavedKeyConfigurationResponse(Uint8List response, int retryLimit,
+          {String requestedSerialDevicePort = ''}) async {
+    onFailed() async {
+      if (retryLimit > 0) {
+        return await requestLoadSavedKeyConfiguration(
+          requestedSerialDevicePort: requestedSerialDevicePort,
+          retryLimit: retryLimit - 1,
+        );
+      } else {
+        return SerialLoadSavedKeyConfigurationResult(
+            requestedSerialDevicePort, null);
+      }
+    }
+
+    if (!SerialDeviceUtils.parseResponseHead(response)
+        .equals(magic.loadKeyConfigurationResponse)) {
+      return onFailed();
+    }
+
+    Uint8List responseBody = SerialDeviceUtils.parseResponseBody(response);
+    if (responseBody.length != keyConfigArrayLength) {
+      onFailed();
+    }
+    return SerialLoadSavedKeyConfigurationResult(requestedSerialDevicePort,
+        KeyConfig.fromUint8List(SerialDeviceUtils.parseResponseBody(response)));
+  }
+
+  /*
+  Future requestLoadKeyConfiguration(
+      {int retryLimit = BuildConfig.serialRetryLimit}) async {
+    if (serialPort == null) {
+      throw SerialPortNotInstantiatedWell(
+          typicalSerialPortNotInstantiatedWellMessage);
+    }
+    beginCommunication();
+
+    serialPort!.write(magic.loadKeyConfigurationRequest);
     try {
       Uint8List response = await streamController!.stream.first
           .timeout(const Duration(seconds: 5));
       print('Received response: $response');
       closeCommunication();
-      return response.equals(magic.handshakeResponse);
+      onResponseLoadKeyConfiguraiton(response, retryLimit);
     } on TimeoutException {
       closeCommunication();
-      return false;
+      rethrow;
     }
   }
 
-  Future<KeyConfig> requestLoadKeyConfiguration() async {
+  void onResponseLoadKeyConfiguraiton(Uint8List response, int retryLimit) {
+    onFailed() {
+      if (retryLimit == 0) {
+        throw SerialPortCommunicationDoneIncompleted(
+            "Serial commuication has been done incompletely.");
+      }
+      requestLoadKeyConfiguration(retryLimit: retryLimit - 1);
+    }
+
+    if (response.length != magic.magicLength + keyConfigArrayLength) {
+      onFailed();
+    }
+    if (!SerialDeviceUtils.parseResponseHead(response)
+        .equals(magic.loadKeyConfigurationResponse)) {
+      onFailed();
+    }
+
+    Globals.instance.applyCurrentSerialDeviceKeyConfigToThis(
+        KeyConfig.fromUint8List(SerialDeviceUtils.parseResponseBody(response)));
+  }
+
+  void requestSaveKeyConfiguration(
+      {int retryLimit = BuildConfig.serialRetryLimit}) async {
     if (serialPort == null) {
       throw SerialPortNotInstantiatedWell('SerialPort is `null`');
     }
@@ -162,21 +312,33 @@ class SerialDevice {
           .timeout(const Duration(seconds: 5));
       print('Received response: $response');
       closeCommunication();
-      if (response.length != keyConfigArrayLength) {
-        throw SerialPortCommunicationDoneIncompleted(
-            "Serial commuication has been done incompletely.");
-      }
-      List<EachKeyConfig> keyConfigs = response.map<EachKeyConfig>((each) {
-        return EachKeyConfig(
-          keycode: ArduinoKeycode.toKey(each % (1 << 8)),
-          enabled: (each / (1 << 8) == 0),
-        );
-      }).toList();
-
-      return Function.apply(KeyConfig.new, keyConfigs) as KeyConfig;
+      onResponseLoadKeyConfiguraiton(response, retryLimit);
     } on TimeoutException {
       closeCommunication();
       rethrow;
     }
   }
+
+  void onResponseSaveKeyConfiguraiton(Uint8List response, int retryLimit) {
+    onFailed() {
+      if (retryLimit == 0) {
+        throw SerialPortCommunicationDoneIncompleted(
+            typicalSerialPortCommunicationDoneIncompletedMessage);
+      }
+      requestLoadKeyConfiguration(retryLimit: retryLimit - 1);
+    }
+
+    if (response.length != magic.magicLength + keyConfigArrayLength) {
+      onFailed();
+      return;
+    }
+    if (!SerialDeviceUtils.parseResponseHead(response)
+        .equals(magic.loadKeyConfigurationResponse)) {
+      onFailed();
+      return;
+    }
+
+    Globals.instance.applyCurrentSerialDeviceKeyConfigToThis(
+        KeyConfig.fromUint8List(SerialDeviceUtils.parseResponseBody(response)));
+  }*/
 }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-enum SelectedDeviceState {
+enum SerialDeviceState {
   idle,
   establishing,
   valid,
   invalid,
+  expired,
 }
 
-class SelectedDeviceStateUtils {
-  static Map<SelectedDeviceState, Color> selectedDeviceStateColorMap = {
-    SelectedDeviceState.idle: Colors.black,
-    SelectedDeviceState.establishing: Colors.orange,
-    SelectedDeviceState.valid: Colors.green,
-    SelectedDeviceState.invalid: Colors.red
+class SerialDeviceStateUtils {
+  static Map<SerialDeviceState, Color> serialDeviceStateColorMap = {
+    SerialDeviceState.idle: Colors.black,
+    SerialDeviceState.establishing: Colors.orange,
+    SerialDeviceState.valid: Colors.green,
+    SerialDeviceState.invalid: Colors.red
   };
 
-  static Color getColor(SelectedDeviceState state) {
-    return selectedDeviceStateColorMap[state] ?? Colors.black;
+  static Color getColor(SerialDeviceState state) {
+    return serialDeviceStateColorMap[state] ?? Colors.black;
   }
 }

@@ -1,57 +1,61 @@
+import 'package:configurator/models/keycode.dart';
+import 'package:configurator/utilities/keycode_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:configurator/models/keycode.dart';
 
 class KeyDetectField extends StatefulWidget {
-  KeyDetectField({super.key, this.callbackFunc, this.nowKey = Keycode.undefined});
-  final Null Function(Keycode)? callbackFunc;
+  KeyDetectField({this.nowKey = Keycode.undefined, this.onChange});
   Keycode nowKey;
+  void Function(Keycode code)? onChange;
   @override
-  State<KeyDetectField> createState() => KeyDetectFieldState();
+  _KeyDetectFieldState createState() => _KeyDetectFieldState();
 }
 
-class KeyDetectFieldState extends State<KeyDetectField> {
-  final TextEditingController _textEditingController = TextEditingController(text: '');
+class _KeyDetectFieldState extends State<KeyDetectField> {
+  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(_onFocusChange);
-    _textEditingController.text = widget.nowKey.name;
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        HardwareKeyboard.instance.addHandler(_handleKeyPress);
+      } else {
+        HardwareKeyboard.instance.removeHandler(_handleKeyPress);
+      }
+    });
+    Future.delayed(Duration.zero, () {
+      if (mounted) {
+        _controller.text = KeycodeUtils.toStringText(context, widget.nowKey);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
+    _controller.dispose();
+    HardwareKeyboard.instance.removeHandler(_handleKeyPress);
     super.dispose();
   }
 
-  void _onFocusChange() {
-    if (_focusNode.hasFocus) {}
+  bool _handleKeyPress(KeyEvent event) {
+    widget.nowKey = FlutterKeycode.toKeycode(event.logicalKey.hashCode);
+    setState(() {
+      // Clear the text field and add the new key label
+      _controller.text = KeycodeUtils.toStringText(context, widget.nowKey);
+    });
+    widget.onChange?.call(widget.nowKey);
+    return true;
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return KeyboardListener(
-      focusNode: _focusNode,
-      autofocus: false,
-      onKeyEvent: (event) {
-        if (event is KeyDownEvent) {
-          widget.nowKey = FlutterKeycode.toKeycode(event.logicalKey.hashCode);
-          _textEditingController.text = widget.nowKey.name;
-          widget.callbackFunc?.call(widget.nowKey);
-        }
-      },
-      child: TextField(
-        controller: _textEditingController,
-        decoration: const InputDecoration(border: OutlineInputBorder()),
+    return TextField(
+        controller: _controller,
+        focusNode: _focusNode,
         textAlign: TextAlign.center,
-        onChanged: (text) {
-          _textEditingController.text = widget.nowKey.name;
-        }
-      )
-      );
+        decoration: const InputDecoration(border: OutlineInputBorder()));
   }
 }

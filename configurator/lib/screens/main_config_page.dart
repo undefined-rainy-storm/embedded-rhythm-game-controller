@@ -17,6 +17,7 @@ class _MainConfigPageState extends State<MainConfigPage> {
     _saveButtonOnPressed = null;
     _revertButtonOnPressed = null;
   }
+
   void Function()? _saveButtonOnPressed;
   void _saveButtonOnPressedHandler() {
     setState(() {
@@ -24,6 +25,7 @@ class _MainConfigPageState extends State<MainConfigPage> {
       Globals.instance.saveCurrentSerialDeviceConfig();
     });
   }
+
   void Function()? _revertButtonOnPressed;
   void _revertButtonOnPressedHandler() {
     setState(() {
@@ -47,17 +49,25 @@ class _MainConfigPageState extends State<MainConfigPage> {
                   child: Text('Device Port', style: TextStyle(fontSize: 20))),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   children: [
-                    DeviceSelector(),
-                    Row(
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: DeviceSelector()),
+                    SizedBox(height: 7),
+                    Align(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        // Todo: Give gap
-                        FilledButton(onPressed: _saveButtonOnPressed, child: Text('Save')),
-                        FilledButton(onPressed: _revertButtonOnPressed, child: Text('Revert')),
+                        FilledButton(
+                            onPressed: _saveButtonOnPressed,
+                            child: Text('Save')),
+                        SizedBox(width: 6),
+                        FilledButton(
+                            onPressed: _revertButtonOnPressed,
+                            child: Text('Revert')),
                       ],
-                    )
+                    ))
                   ],
                 ),
               ),

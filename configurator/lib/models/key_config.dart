@@ -1,4 +1,7 @@
+import 'dart:typed_data';
 import 'package:configurator/models/each_key_config.dart';
+import 'package:configurator/models/error_key_config.dart';
+import 'package:configurator/models/keycode.dart';
 
 // Todo: Find more better way.
 const keyConfigArrayLength = 28;
@@ -104,6 +107,20 @@ class KeyConfig {
 
   // @override
   // int get hashCode
+
+  factory KeyConfig.fromUint8List(Uint8List list) {
+    if (list.length != keyConfigArrayLength) {
+      throw Uint8ListLengthNotOrTooEnough(
+          'Uint8List\'s Length is not enough or too long.');
+    }
+    return Function.apply(
+        KeyConfig.new,
+        list.map<EachKeyConfig>((each) {
+          return EachKeyConfig(
+              keycode: ArduinoKeycode.toKey(each % (1 << 8)),
+              enabled: (each / (1 << 8) == 0));
+        }).toList()) as KeyConfig;
+  }
 
   @override
   bool operator ==(covariant KeyConfig other) {

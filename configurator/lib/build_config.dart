@@ -9,6 +9,11 @@ class BuildConfig {
   static const serialParity = null;
   static const serialFlowControl = null;
 
+  static const serialHandshakeRetryLimit = 1;
+  static const serialDefaultRetryLimit = 3;
+  static const serialHandshakeTimeout = 2;
+  static const serialDefaultTimeout = 3;
+
   static KeyConfig defaultKeyConfig = KeyConfig(
     EachKeyConfig(keycode: Keycode.esc, enabled: false),
     EachKeyConfig(keycode: Keycode.enter, enabled: false),
