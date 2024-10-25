@@ -1,6 +1,7 @@
 #ifndef CONST
 #define CONST
 
-#define undefined (int)-1e8
+#define keyconfig_disabled (1 << 7)
+#define undefined keyconfig_disabled
 
 #endif

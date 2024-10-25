@@ -145,9 +145,11 @@ class KeyConfig implements KeyConfigStructure<EachKeyConfig> {
     return Function.apply(
         KeyConfig.new,
         list.map<EachKeyConfig>((each) {
+          print('keycode: ${ArduinoKeycode.toKey(each)}');
+          print('keycode: ${each != Keycode.undefined}');
           return EachKeyConfig(
-              keycode: ArduinoKeycode.toKey(each % (1 << 8)),
-              enabled: (each / (1 << 8) == 0));
+              keycode: ArduinoKeycode.toKey(each),
+              enabled: each != Keycode.undefined);
         }).toList()) as KeyConfig;
   }
 

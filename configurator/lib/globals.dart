@@ -210,6 +210,7 @@ class Globals {
       return null;
     }
     keyConfig = serialLoadSavedKeyConfigurationResult.data!;
+    requestRefreshKeyConfigValueDisplayerWithKey();
     return keyConfig;
   }
 
