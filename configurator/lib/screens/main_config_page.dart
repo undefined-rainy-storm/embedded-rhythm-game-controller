@@ -16,21 +16,22 @@ class _MainConfigPageState extends State<MainConfigPage> {
   void _resetSaveAndRevertButton() {
     _saveButtonOnPressed = null;
     _revertButtonOnPressed = null;
+    Globals.instance.requestRefreshKeyConfigValueDisplayerWithKey();
   }
 
   void Function()? _saveButtonOnPressed;
   void _saveButtonOnPressedHandler() {
     setState(() {
-      _resetSaveAndRevertButton();
       Globals.instance.saveCurrentSerialDeviceConfig();
+      _resetSaveAndRevertButton();
     });
   }
 
   void Function()? _revertButtonOnPressed;
   void _revertButtonOnPressedHandler() {
     setState(() {
-      _resetSaveAndRevertButton();
       Globals.instance.revertCurrentSerialDeviceConfig();
+      _resetSaveAndRevertButton();
     });
   }
 

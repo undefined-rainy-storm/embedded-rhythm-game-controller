@@ -1,21 +1,45 @@
+import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/key_config_list_item_container.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/widgets/key_detect_field.dart';
 import 'package:flutter/material.dart';
 
 class KeyConfigListItem extends StatefulWidget {
-  final KeyConfigListItemContainer container;
-  const KeyConfigListItem({super.key, required this.container});
+  KeyConfigListItem(
+      {super.key,
+      required this.name,
+      required this.enabled,
+      required this.keycode,
+      this.onInit,
+      this.onActivateChange,
+      this.onKeyChange});
+  final String name;
+  late bool enabled;
+  late Keycode keycode;
+  final Null Function()? onInit;
+  final Null Function(bool)? onActivateChange;
+  final Null Function(Keycode)? onKeyChange;
 
   @override
-  State<KeyConfigListItem> createState() => _KeyConfigListItemState();
+  State<KeyConfigListItem> createState() => KeyConfigListItemState();
 }
 
-class _KeyConfigListItemState extends State<KeyConfigListItem> {
+class KeyConfigListItemState extends State<KeyConfigListItem> {
+  GlobalKey<KeyDetectFieldState> keyDetectFieldKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
-    widget.container.onInit?.call();
+    widget.onInit?.call();
+  }
+
+  void updateValue(EachKeyConfig eachKeyConfig) {
+    setState(() {
+      widget.enabled = eachKeyConfig.enabled;
+      widget.keycode = eachKeyConfig.keycode;
+      keyDetectFieldKey.currentState?.updateKeyCode(eachKeyConfig.keycode);
+      keyDetectFieldKey.currentState?.widget.nowKey = eachKeyConfig.keycode;
+    });
   }
 
   @override
@@ -26,7 +50,7 @@ class _KeyConfigListItemState extends State<KeyConfigListItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                widget.container.name,
+                widget.name,
                 style: TextStyle(fontSize: 12),
               ),
               Transform.scale(
@@ -34,26 +58,27 @@ class _KeyConfigListItemState extends State<KeyConfigListItem> {
                   child: Switch(
                       onChanged: (value) {
                         setState(() {
-                          widget.container.onActivateChange?.call(value);
-                          widget.container.enabled = value;
+                          widget.onActivateChange?.call(value);
+                          widget.enabled = value;
                         });
                       },
-                      value: widget.container.enabled)),
+                      value: widget.enabled)),
             ]),
         Transform.scale(
           scale: .8,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            height: widget.container.enabled ? 60.0 : 0.0,
+            height: widget.enabled ? 60.0 : 0.0,
             alignment: Alignment.centerLeft,
-            child: widget.container.enabled
+            child: widget.enabled
                 ? Container(
                     color: Colors.blueGrey[50], // Optional background color
                     child: KeyDetectField(
-                      nowKey: widget.container.key,
+                      key: keyDetectFieldKey,
+                      nowKey: widget.keycode,
                       onChange: (Keycode code) {
-                        widget.container.onKeyChange?.call(code);
-                        widget.container.key = code;
+                        widget.onKeyChange?.call(code);
+                        widget.keycode = code;
                       },
                     ),
                   )

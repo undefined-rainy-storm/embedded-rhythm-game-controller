@@ -1,19 +1,24 @@
 import 'dart:async';
 
 import 'package:configurator/build_config.dart';
+import 'package:configurator/components/key_config_list_item.dart';
 import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_serial_device.dart';
+import 'package:configurator/models/key_config_structure.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/key_config.dart';
 import 'package:configurator/models/serial_device.dart';
 import 'package:configurator/models/serial_communication_result.dart';
 import 'package:configurator/utilities/selected_device_state.dart';
+import 'package:flutter/widgets.dart';
 
 class Globals {
   String currentLocale = 'kr';
 
   late KeyConfig keyConfig;
   late KeyConfig updatedKeyConfig;
+  late KeyConfigStructure<GlobalKey<KeyConfigListItemState>>?
+      keyConfigGlobalKeys;
   late String currentSerialDevicePort;
   late SerialDeviceState currentSerialDeviceState;
   late Map<String, SerialDevice> _serialDevices;
@@ -228,6 +233,50 @@ class Globals {
       }
     }));
   }*/
+
+  void requestRefreshKeyConfigValueDisplayerWithKey() {
+    keyConfigGlobalKeys?.esc.currentState?.updateValue(keyConfig.esc);
+    keyConfigGlobalKeys?.enter.currentState?.updateValue(keyConfig.enter);
+    keyConfigGlobalKeys?.tab.currentState?.updateValue(keyConfig.tab);
+    keyConfigGlobalKeys?.space.currentState?.updateValue(keyConfig.space);
+    keyConfigGlobalKeys?.speedUp.currentState?.updateValue(keyConfig.speedUp);
+    keyConfigGlobalKeys?.speedDown.currentState
+        ?.updateValue(keyConfig.speedDown);
+    keyConfigGlobalKeys?.rewind.currentState?.updateValue(keyConfig.rewind);
+    keyConfigGlobalKeys?.leftShift.currentState
+        ?.updateValue(keyConfig.leftShift);
+    keyConfigGlobalKeys?.rightShift.currentState
+        ?.updateValue(keyConfig.rightShift);
+    keyConfigGlobalKeys?.arrowUp.currentState?.updateValue(keyConfig.arrowUp);
+    keyConfigGlobalKeys?.arrowDown.currentState
+        ?.updateValue(keyConfig.arrowDown);
+    keyConfigGlobalKeys?.arrowLeft.currentState
+        ?.updateValue(keyConfig.arrowLeft);
+    keyConfigGlobalKeys?.arrowRight.currentState
+        ?.updateValue(keyConfig.arrowRight);
+    keyConfigGlobalKeys?.tuneLeftSide.currentState
+        ?.updateValue(keyConfig.tuneLeftSide);
+    keyConfigGlobalKeys?.tuneS.currentState?.updateValue(keyConfig.tuneS);
+    keyConfigGlobalKeys?.tuneD.currentState?.updateValue(keyConfig.tuneD);
+    keyConfigGlobalKeys?.tuneF.currentState?.updateValue(keyConfig.tuneF);
+    keyConfigGlobalKeys?.tuneC.currentState?.updateValue(keyConfig.tuneC);
+    keyConfigGlobalKeys?.tuneM.currentState?.updateValue(keyConfig.tuneM);
+    keyConfigGlobalKeys?.tuneJ.currentState?.updateValue(keyConfig.tuneJ);
+    keyConfigGlobalKeys?.tuneK.currentState?.updateValue(keyConfig.tuneK);
+    keyConfigGlobalKeys?.tuneL.currentState?.updateValue(keyConfig.tuneL);
+    keyConfigGlobalKeys?.tuneRightSide.currentState
+        ?.updateValue(keyConfig.tuneRightSide);
+    keyConfigGlobalKeys?.emoticon1.currentState
+        ?.updateValue(keyConfig.emoticon1);
+    keyConfigGlobalKeys?.emoticon2.currentState
+        ?.updateValue(keyConfig.emoticon2);
+    keyConfigGlobalKeys?.emoticon3.currentState
+        ?.updateValue(keyConfig.emoticon3);
+    keyConfigGlobalKeys?.emoticon4.currentState
+        ?.updateValue(keyConfig.emoticon4);
+    keyConfigGlobalKeys?.emoticon5.currentState
+        ?.updateValue(keyConfig.emoticon5);
+  }
 
   void saveCurrentSerialDeviceConfig() async {
     // await request..

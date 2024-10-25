@@ -2,45 +2,74 @@ import 'dart:typed_data';
 import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_key_config.dart';
 import 'package:configurator/models/keycode.dart';
+import 'package:configurator/models/key_config_structure.dart';
 
 // Todo: Find more better way.
 const keyConfigArrayLength = 28;
 
-class KeyConfig {
+class KeyConfig implements KeyConfigStructure<EachKeyConfig> {
+  @override
   EachKeyConfig esc;
+  @override
   EachKeyConfig enter;
+  @override
   EachKeyConfig tab; // for Difficulty(Lobby)
+  @override
   EachKeyConfig space; // for Option(Lobby), Manual Fever(Ingame)
 
+  @override
   EachKeyConfig speedUp; // digit1
+  @override
   EachKeyConfig speedDown; // digit2
+  @override
   EachKeyConfig rewind; // Backspace
 
+  @override
   EachKeyConfig
       leftShift; // It may be useless (duplicated with tuneLeftSide in default)
+  @override
   EachKeyConfig
       rightShift; // It may be useless (duplicated with tuneRightSide in default)
 
+  @override
   EachKeyConfig arrowUp;
+  @override
   EachKeyConfig arrowDown;
+  @override
   EachKeyConfig arrowLeft;
+  @override
   EachKeyConfig arrowRight;
 
+  @override
   EachKeyConfig tuneLeftSide;
+  @override
   EachKeyConfig tuneS;
+  @override
   EachKeyConfig tuneD;
+  @override
   EachKeyConfig tuneF;
+  @override
   EachKeyConfig tuneC;
+  @override
   EachKeyConfig tuneM;
+  @override
   EachKeyConfig tuneJ;
+  @override
   EachKeyConfig tuneK;
+  @override
   EachKeyConfig tuneL;
+  @override
   EachKeyConfig tuneRightSide;
 
+  @override
   EachKeyConfig emoticon1; // digit3
+  @override
   EachKeyConfig emoticon2; // digit4
+  @override
   EachKeyConfig emoticon3; // digit5
+  @override
   EachKeyConfig emoticon4; // digit6
+  @override
   EachKeyConfig emoticon5; // digit7
 
   KeyConfig(

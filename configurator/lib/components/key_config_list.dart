@@ -1,5 +1,6 @@
 import 'package:configurator/components/key_config_list_item.dart';
 import 'package:configurator/models/key_config_list_item_container.dart';
+import 'package:configurator/models/key_config_structure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:configurator/models/keycode.dart';
@@ -33,12 +34,51 @@ class _KeyConfigListState extends State<KeyConfigList> {
     _onChangeHandlerCommons();
   }
 
+  KeyConfigStructure<GlobalKey<KeyConfigListItemState>> keyConfigGlobalKeys =
+      KeyConfigStructure<GlobalKey<KeyConfigListItemState>>(
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    Globals.instance.keyConfigGlobalKeys = keyConfigGlobalKeys;
+  }
+
   List<KeyConfigListItemContainer> getKeyConfigEssentialContainers(
       BuildContext context) {
     return <KeyConfigListItemContainer>[
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneLeftSide,
-          key: Globals.instance.updatedKeyConfig.tuneLeftSide.keycode,
+          key: keyConfigGlobalKeys.tuneLeftSide,
+          keycode: Globals.instance.updatedKeyConfig.tuneLeftSide.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneLeftSide.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneLeftSide.enabled = enabled;
@@ -50,7 +90,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneS,
-          key: Globals.instance.updatedKeyConfig.tuneS.keycode,
+          key: keyConfigGlobalKeys.tuneS,
+          keycode: Globals.instance.updatedKeyConfig.tuneS.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneS.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneS.enabled = enabled;
@@ -62,7 +103,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneD,
-          key: Globals.instance.updatedKeyConfig.tuneD.keycode,
+          key: keyConfigGlobalKeys.tuneD,
+          keycode: Globals.instance.updatedKeyConfig.tuneD.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneD.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneD.enabled = enabled;
@@ -74,7 +116,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneF,
-          key: Globals.instance.updatedKeyConfig.tuneF.keycode,
+          key: keyConfigGlobalKeys.tuneF,
+          keycode: Globals.instance.updatedKeyConfig.tuneF.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneF.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneF.enabled = enabled;
@@ -85,8 +128,9 @@ class _KeyConfigListState extends State<KeyConfigList> {
             _onKeyChangeHandler(keycode);
           }),
       KeyConfigListItemContainer(
-          name: AppLocalizations.of(context)!.keyNameTuneF,
-          key: Globals.instance.updatedKeyConfig.tuneC.keycode,
+          name: AppLocalizations.of(context)!.keyNameTuneC,
+          key: keyConfigGlobalKeys.tuneC,
+          keycode: Globals.instance.updatedKeyConfig.tuneC.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneC.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneC.enabled = enabled;
@@ -97,8 +141,9 @@ class _KeyConfigListState extends State<KeyConfigList> {
             _onKeyChangeHandler(keycode);
           }),
       KeyConfigListItemContainer(
-          name: AppLocalizations.of(context)!.keyNameTuneF,
-          key: Globals.instance.updatedKeyConfig.tuneM.keycode,
+          name: AppLocalizations.of(context)!.keyNameTuneM,
+          key: keyConfigGlobalKeys.tuneM,
+          keycode: Globals.instance.updatedKeyConfig.tuneM.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneM.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneM.enabled = enabled;
@@ -110,7 +155,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneJ,
-          key: Globals.instance.updatedKeyConfig.tuneJ.keycode,
+          key: keyConfigGlobalKeys.tuneJ,
+          keycode: Globals.instance.updatedKeyConfig.tuneJ.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneJ.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneJ.enabled = enabled;
@@ -122,7 +168,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneK,
-          key: Globals.instance.updatedKeyConfig.tuneK.keycode,
+          key: keyConfigGlobalKeys.tuneK,
+          keycode: Globals.instance.updatedKeyConfig.tuneK.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneK.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneK.enabled = enabled;
@@ -134,7 +181,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneL,
-          key: Globals.instance.updatedKeyConfig.tuneL.keycode,
+          key: keyConfigGlobalKeys.tuneL,
+          keycode: Globals.instance.updatedKeyConfig.tuneL.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneL.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneL.enabled = enabled;
@@ -146,7 +194,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTuneRightSide,
-          key: Globals.instance.updatedKeyConfig.tuneRightSide.keycode,
+          key: keyConfigGlobalKeys.tuneRightSide,
+          keycode: Globals.instance.updatedKeyConfig.tuneRightSide.keycode,
           enabled: Globals.instance.updatedKeyConfig.tuneRightSide.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tuneRightSide.enabled = enabled;
@@ -164,7 +213,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
     return <KeyConfigListItemContainer>[
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEsc,
-          key: Globals.instance.updatedKeyConfig.esc.keycode,
+          key: keyConfigGlobalKeys.esc,
+          keycode: Globals.instance.updatedKeyConfig.esc.keycode,
           enabled: Globals.instance.updatedKeyConfig.esc.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.esc.enabled = enabled;
@@ -176,7 +226,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEnter,
-          key: Globals.instance.updatedKeyConfig.enter.keycode,
+          key: keyConfigGlobalKeys.enter,
+          keycode: Globals.instance.updatedKeyConfig.enter.keycode,
           enabled: Globals.instance.updatedKeyConfig.enter.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.enter.enabled = enabled;
@@ -188,7 +239,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameTab,
-          key: Globals.instance.updatedKeyConfig.tab.keycode,
+          key: keyConfigGlobalKeys.tab,
+          keycode: Globals.instance.updatedKeyConfig.tab.keycode,
           enabled: Globals.instance.updatedKeyConfig.tab.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.tab.enabled = enabled;
@@ -200,7 +252,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameSpace,
-          key: Globals.instance.updatedKeyConfig.space.keycode,
+          key: keyConfigGlobalKeys.space,
+          keycode: Globals.instance.updatedKeyConfig.space.keycode,
           enabled: Globals.instance.updatedKeyConfig.space.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.space.enabled = enabled;
@@ -212,7 +265,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameSpeedUp,
-          key: Globals.instance.updatedKeyConfig.speedUp.keycode,
+          key: keyConfigGlobalKeys.speedUp,
+          keycode: Globals.instance.updatedKeyConfig.speedUp.keycode,
           enabled: Globals.instance.updatedKeyConfig.speedUp.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.speedUp.enabled = enabled;
@@ -224,7 +278,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameSpeedDown,
-          key: Globals.instance.updatedKeyConfig.speedDown.keycode,
+          key: keyConfigGlobalKeys.speedDown,
+          keycode: Globals.instance.updatedKeyConfig.speedDown.keycode,
           enabled: Globals.instance.updatedKeyConfig.speedDown.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.speedDown.enabled = enabled;
@@ -236,7 +291,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameRewind,
-          key: Globals.instance.updatedKeyConfig.rewind.keycode,
+          key: keyConfigGlobalKeys.rewind,
+          keycode: Globals.instance.updatedKeyConfig.rewind.keycode,
           enabled: Globals.instance.updatedKeyConfig.rewind.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.rewind.enabled = enabled;
@@ -248,7 +304,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameLeftShift,
-          key: Globals.instance.updatedKeyConfig.leftShift.keycode,
+          key: keyConfigGlobalKeys.leftShift,
+          keycode: Globals.instance.updatedKeyConfig.leftShift.keycode,
           enabled: Globals.instance.updatedKeyConfig.leftShift.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.leftShift.enabled = enabled;
@@ -260,7 +317,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameRightShift,
-          key: Globals.instance.updatedKeyConfig.rightShift.keycode,
+          key: keyConfigGlobalKeys.rightShift,
+          keycode: Globals.instance.updatedKeyConfig.rightShift.keycode,
           enabled: Globals.instance.updatedKeyConfig.rightShift.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.rightShift.enabled = enabled;
@@ -272,7 +330,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameArrowUp,
-          key: Globals.instance.updatedKeyConfig.arrowUp.keycode,
+          key: keyConfigGlobalKeys.arrowUp,
+          keycode: Globals.instance.updatedKeyConfig.arrowUp.keycode,
           enabled: Globals.instance.updatedKeyConfig.arrowUp.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.arrowUp.enabled = enabled;
@@ -284,7 +343,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameArrowDown,
-          key: Globals.instance.updatedKeyConfig.arrowDown.keycode,
+          key: keyConfigGlobalKeys.arrowDown,
+          keycode: Globals.instance.updatedKeyConfig.arrowDown.keycode,
           enabled: Globals.instance.updatedKeyConfig.arrowDown.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.arrowDown.enabled = enabled;
@@ -296,7 +356,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameArrowLeft,
-          key: Globals.instance.updatedKeyConfig.arrowLeft.keycode,
+          key: keyConfigGlobalKeys.tuneLeftSide,
+          keycode: Globals.instance.updatedKeyConfig.arrowLeft.keycode,
           enabled: Globals.instance.updatedKeyConfig.arrowLeft.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.arrowLeft.enabled = enabled;
@@ -308,7 +369,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameArrowRight,
-          key: Globals.instance.updatedKeyConfig.arrowRight.keycode,
+          key: keyConfigGlobalKeys.arrowRight,
+          keycode: Globals.instance.updatedKeyConfig.arrowRight.keycode,
           enabled: Globals.instance.updatedKeyConfig.arrowRight.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.arrowRight.enabled = enabled;
@@ -326,7 +388,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
     return <KeyConfigListItemContainer>[
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEmoticon1,
-          key: Globals.instance.updatedKeyConfig.emoticon1.keycode,
+          key: keyConfigGlobalKeys.emoticon1,
+          keycode: Globals.instance.updatedKeyConfig.emoticon1.keycode,
           enabled: Globals.instance.updatedKeyConfig.emoticon1.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.emoticon1.enabled = enabled;
@@ -338,7 +401,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEmoticon2,
-          key: Globals.instance.updatedKeyConfig.emoticon2.keycode,
+          key: keyConfigGlobalKeys.emoticon2,
+          keycode: Globals.instance.updatedKeyConfig.emoticon2.keycode,
           enabled: Globals.instance.updatedKeyConfig.emoticon2.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.emoticon2.enabled = enabled;
@@ -350,7 +414,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEmoticon3,
-          key: Globals.instance.updatedKeyConfig.emoticon3.keycode,
+          key: keyConfigGlobalKeys.emoticon3,
+          keycode: Globals.instance.updatedKeyConfig.emoticon3.keycode,
           enabled: Globals.instance.updatedKeyConfig.emoticon3.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.emoticon3.enabled = enabled;
@@ -362,7 +427,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEmoticon4,
-          key: Globals.instance.updatedKeyConfig.emoticon4.keycode,
+          key: keyConfigGlobalKeys.emoticon4,
+          keycode: Globals.instance.updatedKeyConfig.emoticon4.keycode,
           enabled: Globals.instance.updatedKeyConfig.emoticon4.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.emoticon4.enabled = enabled;
@@ -374,7 +440,8 @@ class _KeyConfigListState extends State<KeyConfigList> {
           }),
       KeyConfigListItemContainer(
           name: AppLocalizations.of(context)!.keyNameEmoticon5,
-          key: Globals.instance.updatedKeyConfig.emoticon5.keycode,
+          key: keyConfigGlobalKeys.emoticon5,
+          keycode: Globals.instance.updatedKeyConfig.emoticon5.keycode,
           enabled: Globals.instance.updatedKeyConfig.emoticon5.enabled,
           onActivateChange: (bool enabled) {
             Globals.instance.updatedKeyConfig.emoticon5.enabled = enabled;
@@ -392,7 +459,15 @@ class _KeyConfigListState extends State<KeyConfigList> {
 
   List<Widget> _buildList(List<KeyConfigListItemContainer> containers) {
     return containers.map<Widget>((KeyConfigListItemContainer container) {
-      return KeyConfigListItem(container: container);
+      return KeyConfigListItem(
+        key: container.key,
+        name: container.name,
+        enabled: container.enabled,
+        keycode: container.keycode,
+        onInit: container.onInit,
+        onActivateChange: container.onActivateChange,
+        onKeyChange: container.onKeyChange,
+      );
     }).toList();
   }
 

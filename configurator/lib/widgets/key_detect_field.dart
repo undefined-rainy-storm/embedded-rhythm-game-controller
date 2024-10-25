@@ -4,16 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class KeyDetectField extends StatefulWidget {
-  KeyDetectField({this.nowKey = Keycode.undefined, this.onChange});
+  KeyDetectField({super.key, this.nowKey = Keycode.undefined, this.onChange});
   Keycode nowKey;
   void Function(Keycode code)? onChange;
   @override
-  _KeyDetectFieldState createState() => _KeyDetectFieldState();
+  State<KeyDetectField> createState() => KeyDetectFieldState();
 }
 
-class _KeyDetectFieldState extends State<KeyDetectField> {
+class KeyDetectFieldState extends State<KeyDetectField> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+
+  void updateKeyCode(Keycode keycode) {
+    setState(() {
+      widget.nowKey = keycode;
+      if (mounted) {
+        _controller.text = KeycodeUtils.toStringText(context, keycode);
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -26,9 +35,7 @@ class _KeyDetectFieldState extends State<KeyDetectField> {
       }
     });
     Future.delayed(Duration.zero, () {
-      if (mounted) {
-        _controller.text = KeycodeUtils.toStringText(context, widget.nowKey);
-      }
+      updateKeyCode(widget.nowKey);
     });
   }
 
