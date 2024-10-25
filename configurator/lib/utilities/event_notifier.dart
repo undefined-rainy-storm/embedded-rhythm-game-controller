@@ -12,6 +12,18 @@ class EventNotifier {
       case NotifyingEvents.serialDeviceDoesNotResponseMayInvalidDevice:
         return AppLocalizations.of(context)!
             .notifyingEventsSerialDeviceDoesNotResponse_mayInvalidDevice;
+      case NotifyingEvents.serialDeviceConfigSaveComplete:
+        return AppLocalizations.of(context)!
+            .notifyingEventsSerialDeviceConfigSaveComplete;
+      case NotifyingEvents.serialDeviceConfigSaveError:
+        return AppLocalizations.of(context)!
+            .notifyingEventsSerialDeviceConfigSaveError;
+      case NotifyingEvents.serialDeviceConfigSaveErrorDataReceivedIncompletely:
+        return AppLocalizations.of(context)!
+            .notifyingEventsSerialDeviceConfigSaveErrorDataReceivedIncompletely;
+      case NotifyingEvents.serialDeviceConfigSaveErrorDataReturnedIncompletely:
+        return AppLocalizations.of(context)!
+            .notifyingEventsSerialDeviceConfigSaveErrorDataReturnedIncompletely;
     }
   }
 }

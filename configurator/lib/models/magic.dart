@@ -29,3 +29,8 @@ Uint8List setKeyConfigurationRequest =
 // 2e 73 63 2e 72 65 73 2e 61
 Uint8List setKeyConfigurationResponse =
     Uint8List.fromList('.sc.res.a'.codeUnits);
+
+// set key request served incompletely
+// 2e 73 63 2e 72 65 71 2e 62
+Uint8List setKeyConfigurationRequestIncomplete =
+    Uint8List.fromList('.sc.res.b'.codeUnits);

@@ -1,11 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:configurator/globals.dart';
 import 'package:configurator/models/each_key_config.dart';
 import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/key_config.dart';
 import 'package:configurator/models/keycode.dart';
 import 'package:configurator/models/serial_communication_result.dart';
+import 'package:configurator/utilities/keycode_utils.dart';
 import 'package:configurator/utilities/selected_device_state.dart';
 import 'package:configurator/utilities/serial_device_utils.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
@@ -246,6 +249,89 @@ class SerialDevice {
     if (!SerialDeviceUtils.parseResponseHead(response)
         .equals(magic.loadKeyConfigurationResponse)) {
       return onFailed();
+    }
+
+    Uint8List responseBody = SerialDeviceUtils.parseResponseBody(response);
+    if (responseBody.length != keyConfigArrayLength) {
+      onFailed();
+    }
+    return SerialLoadSavedKeyConfigurationResult(requestedSerialDevicePort,
+        KeyConfig.fromUint8List(SerialDeviceUtils.parseResponseBody(response)));
+  }
+
+  Future<SerialLoadSavedKeyConfigurationResult> requestSaveKeyConfiguration({
+    String requestedSerialDevicePort = '',
+    int retryLimit = BuildConfig.serialDefaultRetryLimit,
+  }) async {
+    if (serialPort == null) {
+      throw SerialPortNotInstantiatedWell(
+          typicalSerialPortCommunicationDoneIncompletedMessage);
+    }
+    beginCommunication();
+
+    serialPort!.write(magic.setKeyConfigurationRequest);
+    serialPort!.write(Uint8List.fromList(
+        Globals.instance.keyConfig.toListKeyCode().map((each) {
+      return KeycodeUtils.toArduinoKeycode(each);
+    }).toList()));
+
+    try {
+      Uint8List value = await streamController!.stream.first.timeout(
+        const Duration(seconds: BuildConfig.serialDefaultTimeout),
+      );
+      closeCommunication();
+      print(value);
+      return await onSaveKeyConfigurationResponse(
+        value,
+        retryLimit,
+        requestedSerialDevicePort: requestedSerialDevicePort,
+      );
+    } catch (error) {
+      closeCommunication();
+      if (error is TimeoutException) {
+        if (retryLimit > 0) {
+          return await requestLoadSavedKeyConfiguration(
+            requestedSerialDevicePort: requestedSerialDevicePort,
+            retryLimit: retryLimit - 1,
+          );
+        } else {
+          return SerialLoadSavedKeyConfigurationResult(
+              requestedSerialDevicePort, null);
+        }
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<SerialLoadSavedKeyConfigurationResult> onSaveKeyConfigurationResponse(
+      Uint8List response, int retryLimit,
+      {String requestedSerialDevicePort = ''}) async {
+    onFailed({Exception? error}) async {
+      if (retryLimit > 0) {
+        return await requestSaveKeyConfiguration(
+          requestedSerialDevicePort: requestedSerialDevicePort,
+          retryLimit: retryLimit - 1,
+        );
+      } else {
+        if (error != null) throw error;
+        return SerialLoadSavedKeyConfigurationResult(
+            requestedSerialDevicePort, null);
+      }
+    }
+
+    Uint8List responseHead = SerialDeviceUtils.parseResponseHead(response);
+    if (responseHead.equals(magic.setKeyConfigurationRequestIncomplete)) {
+      log('Response from device throws configuration array sent incompletely.',
+          time: DateTime.now());
+      return onFailed(
+          error: SerialPortCommunicationIncompletelyDoneThrownFromDevice(
+              typicalSerialPortCommunicationIncompletelyDoneThrownFromDeviceMessage));
+    }
+    if (!responseHead.equals(magic.setKeyConfigurationResponse)) {
+      return onFailed(
+          error: SerialPortCommunicationResponseIsOutOfScenario(
+              typicalSerialPortCommunicationResponseIsOutOfScenarioMessage));
     }
 
     Uint8List responseBody = SerialDeviceUtils.parseResponseBody(response);

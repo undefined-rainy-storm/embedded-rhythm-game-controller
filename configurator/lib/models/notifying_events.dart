@@ -1,4 +1,8 @@
 enum NotifyingEvents {
   serialDeviceDoesNotResponse,
-  serialDeviceDoesNotResponseMayInvalidDevice
+  serialDeviceDoesNotResponseMayInvalidDevice,
+  serialDeviceConfigSaveComplete,
+  serialDeviceConfigSaveError,
+  serialDeviceConfigSaveErrorDataReceivedIncompletely,
+  serialDeviceConfigSaveErrorDataReturnedIncompletely,
 }

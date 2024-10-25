@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:configurator/utilities/event_snackbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:configurator/models/error_serial_device.dart';
 import 'package:configurator/models/list_dropdown_button_item.dart';
@@ -10,7 +11,6 @@ import 'package:configurator/globals.dart';
 import 'package:configurator/models/serial_descriptor.dart';
 import 'package:configurator/widgets/list_dropdown_button.dart';
 import 'package:configurator/utilities/selected_device_state.dart';
-import 'package:configurator/utilities/event_notifier.dart';
 
 class DeviceSelector extends StatefulWidget {
   const DeviceSelector({super.key});
@@ -45,13 +45,6 @@ class _DeviceSelectorState extends State<DeviceSelector> {
     _loadAvailableDevice();
   }
 
-  void _showEventSnackBar(
-      BuildContext context, NotifyingEvents notifyingEvent) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-            EventNotifier.eventNotifyingMessage(context, notifyingEvent))));
-  }
-
   void _onSelected(IListDropdownButtonItem selected) {
     // Phase 1: Invoke validation to check selected device is valid.
     Globals.instance.currentSerialDevicePort = selected.toValue();
@@ -72,7 +65,7 @@ class _DeviceSelectorState extends State<DeviceSelector> {
         }
       }
       if (resultState == SerialDeviceState.invalid && mounted) {
-        _showEventSnackBar(context,
+        showEventSnackBar(context,
             NotifyingEvents.serialDeviceDoesNotResponseMayInvalidDevice);
       }
 
@@ -85,7 +78,7 @@ class _DeviceSelectorState extends State<DeviceSelector> {
         case StreamControllerNotInstantiatedWell _:
         case TimeoutException _:
           if (mounted) {
-            _showEventSnackBar(
+            showEventSnackBar(
                 context, NotifyingEvents.serialDeviceDoesNotResponse);
           }
       }

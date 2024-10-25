@@ -1,5 +1,8 @@
 import 'package:configurator/components/device_selector.dart';
 import 'package:configurator/globals.dart';
+import 'package:configurator/models/error_serial_device.dart';
+import 'package:configurator/models/notifying_events.dart';
+import 'package:configurator/utilities/event_snackbar.dart';
 import 'package:configurator/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,13 +19,37 @@ class _MainConfigPageState extends State<MainConfigPage> {
   void _resetSaveAndRevertButton() {
     _saveButtonOnPressed = null;
     _revertButtonOnPressed = null;
-    Globals.instance.requestRefreshKeyConfigValueDisplayerWithKey();
   }
 
   void Function()? _saveButtonOnPressed;
   void _saveButtonOnPressedHandler() {
+    Globals.instance.saveCurrentSerialDeviceConfig().then((isDone) {
+      if (mounted) {
+        if (isDone) {
+          showEventSnackBar(
+              context, NotifyingEvents.serialDeviceConfigSaveComplete);
+        } else {
+          showEventSnackBar(
+              context, NotifyingEvents.serialDeviceConfigSaveError);
+        }
+      }
+    }).catchError((error) {
+      if (mounted) {
+        switch (error.runtimeType) {
+          case SerialPortCommunicationDoneIncompleted _:
+            showEventSnackBar(
+                context,
+                NotifyingEvents
+                    .serialDeviceConfigSaveErrorDataReceivedIncompletely);
+            return;
+          case SerialPortCommunicationResponseIsOutOfScenario _:
+            showEventSnackBar(
+                context, NotifyingEvents.serialDeviceConfigSaveError);
+            return;
+        }
+      }
+    });
     setState(() {
-      Globals.instance.saveCurrentSerialDeviceConfig();
       _resetSaveAndRevertButton();
     });
   }

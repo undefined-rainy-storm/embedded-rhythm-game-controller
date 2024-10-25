@@ -42,3 +42,28 @@ class SerialPortCommunicationDoneIncompleted implements Exception {
 
 String typicalSerialPortCommunicationDoneIncompletedMessage =
     'Serial commuication has been done incompletely.';
+
+class SerialPortCommunicationIncompletelyDoneThrownFromDevice
+    implements Exception {
+  String cause;
+  SerialPortCommunicationIncompletelyDoneThrownFromDevice(this.cause);
+}
+
+String typicalSerialPortCommunicationIncompletelyDoneThrownFromDeviceMessage =
+    'Device throws error that serial port communication has been done.';
+
+class SerialPortCommunicationResponseIsOutOfScenario implements Exception {
+  String cause;
+  SerialPortCommunicationResponseIsOutOfScenario(this.cause);
+}
+
+String typicalSerialPortCommunicationResponseIsOutOfScenarioMessage =
+    'Device\'s response cannot be like received. (out of scenario)';
+
+class SerialPortCommunicationResultIsNotExpected implements Exception {
+  String cause;
+  SerialPortCommunicationResultIsNotExpected(this.cause);
+}
+
+String typicalSerialPortCommunicationResultIsNotExpectedMessage =
+    'SerialPort communication result is not expected value.';

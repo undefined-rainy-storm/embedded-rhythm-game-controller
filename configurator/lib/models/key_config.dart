@@ -137,6 +137,39 @@ class KeyConfig implements KeyConfigStructure<EachKeyConfig> {
   // @override
   // int get hashCode
 
+  List<Keycode> toListKeyCode() {
+    return [
+      esc.keycode,
+      enter.keycode,
+      tab.keycode,
+      space.keycode,
+      speedUp.keycode,
+      speedDown.keycode,
+      rewind.keycode,
+      leftShift.keycode,
+      rightShift.keycode,
+      arrowUp.keycode,
+      arrowDown.keycode,
+      arrowLeft.keycode,
+      arrowRight.keycode,
+      tuneLeftSide.keycode,
+      tuneS.keycode,
+      tuneD.keycode,
+      tuneF.keycode,
+      tuneC.keycode,
+      tuneM.keycode,
+      tuneJ.keycode,
+      tuneK.keycode,
+      tuneL.keycode,
+      tuneRightSide.keycode,
+      emoticon1.keycode,
+      emoticon2.keycode,
+      emoticon3.keycode,
+      emoticon4.keycode,
+      emoticon5.keycode,
+    ];
+  }
+
   factory KeyConfig.fromUint8List(Uint8List list) {
     if (list.length != keyConfigArrayLength) {
       throw Uint8ListLengthNotOrTooEnough(
@@ -145,8 +178,6 @@ class KeyConfig implements KeyConfigStructure<EachKeyConfig> {
     return Function.apply(
         KeyConfig.new,
         list.map<EachKeyConfig>((each) {
-          print('keycode: ${ArduinoKeycode.toKey(each)}');
-          print('keycode: ${each != Keycode.undefined}');
           return EachKeyConfig(
               keycode: ArduinoKeycode.toKey(each),
               enabled: each != Keycode.undefined);

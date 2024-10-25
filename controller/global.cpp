@@ -12,6 +12,14 @@ inline void setDefaultIfInvalid(int &key, int defaultValue)
   }
 }
 
+void Global::putEEPROM() {
+  EEPROM.put(EEPROM_GLOBAL_KEYMAP_ADDRESS, _keymap);
+}
+
+void Global::getEEPROM() {
+  EEPROM.get(EEPROM_GLOBAL_KEYMAP_ADDRESS, _keymap);
+}
+
 // Global constructor
 Global::Global() : keymap(&_keymap)
 { // Initialize keymap in the initializer list

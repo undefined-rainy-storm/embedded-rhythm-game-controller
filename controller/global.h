@@ -14,6 +14,8 @@ private:
   keymap_t _keymap;
 public:
   static Global *getInstance();
+  void putEEPROM();
+  void getEEPROM();
 
   KeymapConfig keymap;
   SerialCommState serialCommState;  

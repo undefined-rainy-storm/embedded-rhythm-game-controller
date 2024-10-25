@@ -214,6 +214,24 @@ class Globals {
     return keyConfig;
   }
 
+  Future<KeyConfig?> requestSaveKeyConfiguration() async {
+    SerialDevice current = currentSerialDevice;
+    SerialLoadSavedKeyConfigurationResult
+        serialLoadSavedKeyConfigurationResult =
+        await current.requestLoadSavedKeyConfiguration(
+            requestedSerialDevicePort: currentSerialDevicePort);
+
+    if (currentSerialDevicePort != serialLoadSavedKeyConfigurationResult.port) {
+      return null;
+    }
+    if (serialLoadSavedKeyConfigurationResult.data == null) {
+      return null;
+    }
+    keyConfig = serialLoadSavedKeyConfigurationResult.data!;
+    requestRefreshKeyConfigValueDisplayerWithKey();
+    return keyConfig;
+  }
+
 /*
   void requestGetCurrentSerialDeviceConfig() {
     /// Load device's keyconfig data
@@ -279,15 +297,22 @@ class Globals {
         ?.updateValue(keyConfig.emoticon5);
   }
 
-  void saveCurrentSerialDeviceConfig() async {
+  Future<bool> saveCurrentSerialDeviceConfig() async {
     // await request..
     keyConfig = KeyConfig.clone(updatedKeyConfig);
+    SerialDevice current = currentSerialDevice;
+    SerialLoadSavedKeyConfigurationResult result =
+        await current.requestSaveKeyConfiguration(
+            requestedSerialDevicePort: currentSerialDevicePort);
+    requestRefreshKeyConfigValueDisplayerWithKey();
+    return result.data != null;
   }
 
   void revertCurrentSerialDeviceConfig() async {
     // await request..
     updatedKeyConfig = KeyConfig.clone(keyConfig);
     callOnKeyConfigChangeEventHandlers();
+    requestRefreshKeyConfigValueDisplayerWithKey();
   }
 
   void applyCurrentSerialDeviceKeyConfigToThis(KeyConfig keyConfig) {
